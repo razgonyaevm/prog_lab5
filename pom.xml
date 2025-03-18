@@ -63,6 +63,26 @@
                     </archive>
                 </configuration>
             </plugin>
+            <!-- javadoc plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <configuration>
+                    <author>true</author>
+                    <version>true</version>
+                    <encoding>UTF-8</encoding>
+                    <doclint>none</doclint> <!-- Отключение строгой проверки -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
