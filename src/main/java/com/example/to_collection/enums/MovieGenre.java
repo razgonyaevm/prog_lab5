@@ -1,10 +1,10 @@
 package com.example.to_collection.enums;
 
 public enum MovieGenre {
-  COMEDY ("Комедия"),
-  MUSICAL ("Мюзикл"),
-  THRILLER ("Триллер"),
-  HORROR ("Ужас");
+  COMEDY("Комедия"),
+  MUSICAL("Мюзикл"),
+  THRILLER("Триллер"),
+  HORROR("Ужас");
 
   private String genre;
 
