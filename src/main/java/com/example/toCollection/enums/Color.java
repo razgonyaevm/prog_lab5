@@ -1,4 +1,4 @@
-package com.example.to_collection.enums;
+package com.example.toCollection.enums;
 
 public enum Color {
   YELLOW("Желтый"),

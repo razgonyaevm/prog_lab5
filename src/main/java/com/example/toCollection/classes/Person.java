@@ -1,7 +1,7 @@
-package com.example.to_collection.classes;
+package com.example.toCollection.classes;
 
-import com.example.to_collection.enums.Color;
-import com.example.to_collection.enums.Country;
+import com.example.toCollection.enums.Color;
+import com.example.toCollection.enums.Country;
 import lombok.*;
 
 @Getter

@@ -1,7 +1,7 @@
-package com.example.to_collection.classes;
+package com.example.toCollection.classes;
 
-import com.example.to_collection.enums.MovieGenre;
-import com.example.to_collection.enums.MpaaRating;
+import com.example.toCollection.enums.MovieGenre;
+import com.example.toCollection.enums.MpaaRating;
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.*;

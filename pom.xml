@@ -58,7 +58,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.main_program.Program</mainClass>
+                            <mainClass>com.example.mainProgram.Program</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
