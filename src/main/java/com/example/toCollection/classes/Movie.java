@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Movie implements Comparable<Movie>{
+public class Movie implements Comparable<Movie> {
   private static final AtomicLong idGenerator = new AtomicLong(1);
 
   private Long id; // генерируется автоматически, уникален
