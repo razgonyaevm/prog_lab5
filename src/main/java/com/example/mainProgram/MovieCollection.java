@@ -1,17 +1,25 @@
 package com.example.mainProgram;
 
+import com.example.mainProgram.forXML.XMLHandler;
 import com.example.toCollection.classes.Movie;
 import com.example.toCollection.classes.Person;
+import java.time.LocalDateTime;
 import java.util.*;
+import lombok.Getter;
 
+@Getter
 public class MovieCollection {
   private final LinkedList<Movie> movies = new LinkedList<>();
+  private final LocalDateTime initializationDate = LocalDateTime.now();
 
   public void add(Movie movie) {
     movies.add(movie);
   }
 
   public void update(long id, Movie newMovie) {
+    if (id <= 0) {
+      throw new IllegalArgumentException("ID must be greater than 0");
+    }
     for (int i = 0; i < movies.size(); i++) {
       if (movies.get(i).getId().equals(id)) {
         movies.set(i, newMovie);
@@ -67,4 +75,20 @@ public class MovieCollection {
         .sorted(Comparator.reverseOrder())
         .forEach(System.out::println);
   }
+
+  public void setMovies(LinkedList<Movie> movies) {
+    this.movies.clear();
+    this.movies.addAll(movies);
+  }
+
+  public int size() {
+    return movies.size();
+  }
+
+  public void save() {
+    XMLHandler xmlHandler = new XMLHandler("../xml/movies.xml");
+    xmlHandler.save(movies);
+  }
+
+  public void executeScript(String filePath) {}
 }

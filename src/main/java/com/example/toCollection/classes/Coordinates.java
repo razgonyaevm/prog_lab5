@@ -5,9 +5,10 @@ import lombok.*;
 @ToString
 @Getter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Coordinates {
-  private double x; // Значение поля должно быть больше -817
-  private Long y; // Поле не может быть null
+  private double x;
+  private Long y;
 
   public Coordinates(double x, Long y) {
     if (x <= -817) {
