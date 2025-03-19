@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Movie {
+public class Movie implements Comparable<Movie>{
   private static final AtomicLong idGenerator = new AtomicLong(1);
 
   private Long id; // генерируется автоматически, уникален
@@ -80,5 +80,10 @@ public class Movie {
       throw new IllegalArgumentException("Length must be greater than 0");
     }
     this.length = length;
+  }
+
+  @Override
+  public int compareTo(Movie other) {
+    return Integer.compare(this.oscarsCount, other.oscarsCount);
   }
 }
