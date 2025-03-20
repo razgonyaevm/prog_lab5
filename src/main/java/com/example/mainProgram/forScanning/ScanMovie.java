@@ -33,7 +33,7 @@ public class ScanMovie {
   }
 
   /** Устанавливает название фильма */
-  private void setName() {
+  public void setName() {
     while (true) {
       try {
         System.out.print("Введите название фильма: ");
@@ -46,7 +46,7 @@ public class ScanMovie {
   }
 
   /** Устанавливает координаты фильма (знать бы еще, что это и зачем оно нужно) */
-  private void setCoordinates() {
+  public void setCoordinates() {
     while (true) {
       try {
         System.out.print("Введите первую координату: ");
