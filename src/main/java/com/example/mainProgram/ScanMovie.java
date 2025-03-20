@@ -8,13 +8,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
-public class ScanMovie extends ScanOperator {
+public class ScanMovie {
   @Getter private Movie movie;
   private Coordinates coordinates;
   private Scanner scanner;
 
   public ScanMovie(Scanner scanner) {
-    super(scanner);
     this.scanner = scanner;
     movie = new Movie();
     coordinates = new Coordinates();
@@ -25,8 +24,8 @@ public class ScanMovie extends ScanOperator {
     setLength();
     setGenre();
     setMpaaRating();
-    setOperator();
-    movie.setOperator(super.getOperator());
+    ScanOperator operator = new ScanOperator(scanner);
+    movie.setOperator(operator.getOperator());
   }
 
   private void setName() {
@@ -64,7 +63,7 @@ public class ScanMovie extends ScanOperator {
         if (y.isEmpty()) {
           coordinates.setY(null);
         } else {
-          coordinates.setY(parseLong(scanner.nextLine()));
+          coordinates.setY(parseLong(y));
         }
         break;
       } catch (IllegalArgumentException e) {
@@ -100,7 +99,7 @@ public class ScanMovie extends ScanOperator {
         if (length.isEmpty()) {
           movie.setLength(0);
         } else {
-          movie.setLength(parseInt(scanner.nextLine()));
+          movie.setLength(parseInt(length));
         }
         break;
       } catch (IllegalArgumentException e) {

@@ -3,6 +3,7 @@ package com.example.mainProgram.forXML;
 import com.example.toCollection.classes.Movie;
 import jakarta.xml.bind.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 
@@ -18,7 +19,20 @@ public class XMLHandler {
   }
 
   public void save(LinkedList<Movie> movies) {
-    try (OutputStream outputStream = new FileOutputStream(filePath);
+    try {
+      // Получаем путь к JAR-файлу
+      String jarPath =
+          new File(XMLHandler.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+              .getParent();
+      String filePath = jarPath + "/new_movies.xml";
+    } catch (URISyntaxException e) {
+      System.err.println("Ошибка: некорректный URI!");
+    }
+
+    File file = new File(filePath);
+    file.getParentFile().mkdirs(); // Создаём директории, если их нет
+
+    try (OutputStream outputStream = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(outputStream);
         OutputStreamWriter osw = new OutputStreamWriter(bos, StandardCharsets.UTF_8); ) {
 

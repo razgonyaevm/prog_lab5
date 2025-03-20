@@ -86,7 +86,7 @@ public class MovieCollection {
   }
 
   public void save() {
-    XMLHandler xmlHandler = new XMLHandler("../xml/movies.xml");
+    XMLHandler xmlHandler = new XMLHandler("xml/new_movies.xml");
     xmlHandler.save(movies);
   }
 
