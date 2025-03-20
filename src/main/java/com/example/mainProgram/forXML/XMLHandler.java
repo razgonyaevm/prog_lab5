@@ -12,29 +12,29 @@ import java.util.LinkedList;
  * href="https://javarush.com/quests/lectures/questcollections.level03.lecture07">JavaRush</a>
  */
 public class XMLHandler {
-  private final String filePath;
+  private String filePath;
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
   }
 
+  /** Сохранение коллекции в файл, хранящийся в директории с jar архивом (./resources/xml/) */
   public void save(LinkedList<Movie> movies) {
     try {
       // Получаем путь к JAR-файлу
       String jarPath =
           new File(XMLHandler.class.getProtectionDomain().getCodeSource().getLocation().toURI())
               .getParent();
-      String filePath = jarPath + "/new_movies.xml";
+      this.filePath = jarPath + "/resources/xml/" + filePath;
     } catch (URISyntaxException e) {
       System.err.println("Ошибка: некорректный URI!");
     }
 
     File file = new File(filePath);
-    file.getParentFile().mkdirs(); // Создаём директории, если их нет
 
     try (OutputStream outputStream = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(outputStream);
-        OutputStreamWriter osw = new OutputStreamWriter(bos, StandardCharsets.UTF_8); ) {
+        OutputStreamWriter osw = new OutputStreamWriter(bos, StandardCharsets.UTF_8)) {
 
       JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
       Marshaller marshaller = context.createMarshaller();
@@ -49,7 +49,8 @@ public class XMLHandler {
     }
   }
 
-  public LinkedList<Movie> load() {
+  /** Загрузка коллекции из JAR-файла */
+  public LinkedList<Movie> load_jar() {
     try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
       if (inputStream == null) {
         System.out.println("Файл не найден");
@@ -70,5 +71,23 @@ public class XMLHandler {
       System.out.println("Ошибка загрузки XML: " + e.getMessage());
       return new LinkedList<>();
     }
+  }
+
+  /** Загрузка коллекции из локального репозитория, хранящегося в директории с jar архивом (./resources/xml/) */
+  public LinkedList<Movie> load_local() {
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+      JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
+      Unmarshaller unmarshaller = context.createUnmarshaller();
+      MovieCollectionWrapper wrapper = (MovieCollectionWrapper) unmarshaller.unmarshal(br);
+      return wrapper.getMovies();
+    } catch (FileNotFoundException e) {
+      System.out.println("Файл не найден");
+    } catch (IOException e) {
+      System.out.println("Ошибка при чтении файла: " + e.getMessage());
+    } catch (Exception e) {
+      System.out.println("Ошибка загрузки XML: " + e.getMessage());
+      return new LinkedList<>();
+    }
+    return new LinkedList<>();
   }
 }

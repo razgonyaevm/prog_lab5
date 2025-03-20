@@ -2,7 +2,6 @@ package com.example.mainProgram;
 
 import com.example.mainProgram.forXML.XMLHandler;
 import com.example.toCollection.classes.Movie;
-import com.example.toCollection.classes.Person;
 import java.time.LocalDateTime;
 import java.util.*;
 import lombok.Getter;
@@ -64,9 +63,12 @@ public class MovieCollection {
     System.out.println("Сумма length: " + sum);
   }
 
-  public void countByOperator(Person operator) {
-    long count = movies.stream().filter(m -> Objects.equals(m.getOperator(), operator)).count();
-    System.out.println("Количество фильмов с оператором " + operator + ": " + count);
+  public void countByOperator(String operatorName) {
+    long count =
+        movies.stream()
+            .filter(m -> Objects.equals(m.getOperator().getName(), operatorName))
+            .count();
+    System.out.println("Количество фильмов оператора " + operatorName + ": " + count);
   }
 
   public void printDescendingOscarsCount() {
@@ -86,9 +88,7 @@ public class MovieCollection {
   }
 
   public void save() {
-    XMLHandler xmlHandler = new XMLHandler("xml/new_movies.xml");
+    XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
     xmlHandler.save(movies);
   }
-
-  public void executeScript(String filePath) {}
 }
