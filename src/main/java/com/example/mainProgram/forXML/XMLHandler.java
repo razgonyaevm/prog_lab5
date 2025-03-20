@@ -61,10 +61,7 @@ public class XMLHandler {
           InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
           BufferedReader br = new BufferedReader(isr)) {
 
-        JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        MovieCollectionWrapper wrapper = (MovieCollectionWrapper) unmarshaller.unmarshal(br);
-        return wrapper.getMovies();
+        return getMovies(br);
       }
 
     } catch (Exception e) {
@@ -73,13 +70,13 @@ public class XMLHandler {
     }
   }
 
-  /** Загрузка коллекции из локального репозитория, хранящегося в директории с jar архивом (./resources/xml/) */
+  /**
+   * Загрузка коллекции из локального репозитория, хранящегося в директории с jar архивом
+   * (./resources/xml/)
+   */
   public LinkedList<Movie> load_local() {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-      JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
-      Unmarshaller unmarshaller = context.createUnmarshaller();
-      MovieCollectionWrapper wrapper = (MovieCollectionWrapper) unmarshaller.unmarshal(br);
-      return wrapper.getMovies();
+      return getMovies(br);
     } catch (FileNotFoundException e) {
       System.out.println("Файл не найден");
     } catch (IOException e) {
@@ -89,5 +86,32 @@ public class XMLHandler {
       return new LinkedList<>();
     }
     return new LinkedList<>();
+  }
+
+  private LinkedList<Movie> getMovies(BufferedReader br) throws JAXBException {
+    JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+    MovieCollectionWrapper wrapper = (MovieCollectionWrapper) unmarshaller.unmarshal(br);
+
+    LinkedList<Movie> movies = wrapper.getMovies();
+    for (Movie movie : movies) {
+      validateMovie(movie);
+    }
+    return movies;
+  }
+
+  private void validateMovie(Movie movie) {
+    if (movie.getName() == null || movie.getName().trim().isEmpty()) {
+      throw new IllegalArgumentException("Movie name cannot be null or empty");
+    }
+    if (movie.getCoordinates() == null) {
+      throw new IllegalArgumentException("Movie coordinates cannot be null");
+    }
+    if (movie.getOscarsCount() <= 0) {
+      throw new IllegalArgumentException("Oscars count must be a positive number");
+    }
+    if (movie.getLength() == null || movie.getLength() <= 0) {
+      throw new IllegalArgumentException("Length must be a positive number");
+    }
   }
 }
