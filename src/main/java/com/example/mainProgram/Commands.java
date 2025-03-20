@@ -10,8 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
+/** Класс обрабатывающий команды */
 public class Commands {
-
+  /** Обработка команд */
   public static void commands_list(String command, MovieCollection collection, Scanner scanner) {
     switch (command.split(" ")[0]) {
       case "help":
@@ -79,6 +80,7 @@ public class Commands {
     }
   }
 
+  /** Вывод справки */
   public static void help() {
     System.out.println(
         """
@@ -102,12 +104,14 @@ public class Commands {
                             """);
   }
 
+  /** Вывод информации о коллекции */
   public static void info(MovieCollection collection) {
     System.out.println("Тип коллекции: LinkedList");
     System.out.println("Количество элементов: " + collection.size());
     System.out.println("Дата инициализации: " + collection.getInitializationDate());
   }
 
+  /** Добавление элемента в коллекцию */
   public static void add(String command, MovieCollection collection, Scanner scanner) {
     if (command.split(" ").length != 1) {
       System.out.println("Ошибка: слишком много параметров");
@@ -121,6 +125,7 @@ public class Commands {
     }
   }
 
+  /** Обновление элемента в коллекции по его id */
   public static void update(String command, MovieCollection collection, Scanner scanner) {
     if (command.split(" ").length != 2) {
       System.out.println("Ошибка: укажите id");
@@ -134,6 +139,7 @@ public class Commands {
     }
   }
 
+  /** Удаление элемента из коллекции по его id */
   public static void removeById(String command, MovieCollection collection) {
     if (command.split(" ").length != 2) {
       System.out.println("Ошибка: укажите id");
@@ -142,6 +148,7 @@ public class Commands {
     collection.removeById(parseLong(command.split(" ")[1]));
   }
 
+  /** Удаление элемента из коллекции по индексу */
   public static void removeAt(String command, MovieCollection collection) {
     if (command.split(" ").length != 2) {
       System.out.println("Ошибка: укажите id");
@@ -150,6 +157,7 @@ public class Commands {
     collection.removeAt(parseInt(command.split(" ")[1]));
   }
 
+  /** Подсчет количества фильмов, у которых имя оператора равно заданному */
   public static void countByOperator(String command, MovieCollection collection) {
     if (command.length() <= 18) {
       System.out.println("Укажите имя оператора");

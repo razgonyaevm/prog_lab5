@@ -1,4 +1,4 @@
-package com.example.mainProgram;
+package com.example.mainProgram.forScanning;
 
 import static com.example.mainProgram.ParserClass.*;
 
@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
+/**
+ * Класс для сканирования и создания экземпляров класса {@link
+ * com.example.toCollection.classes.Movie}
+ */
 public class ScanMovie {
   @Getter private Movie movie;
   private Coordinates coordinates;
@@ -28,6 +32,7 @@ public class ScanMovie {
     movie.setOperator(operator.getOperator());
   }
 
+  /** Устанавливает название фильма */
   private void setName() {
     while (true) {
       try {
@@ -40,12 +45,13 @@ public class ScanMovie {
     }
   }
 
+  /** Устанавливает координаты фильма (знать бы еще, что это и зачем оно нужно) */
   private void setCoordinates() {
     while (true) {
       try {
         System.out.print("Введите первую координату: ");
         String x = scanner.nextLine();
-        if (x.isEmpty()) {
+        if (x.trim().isEmpty()) {
           coordinates.setX(0);
         } else {
           coordinates.setX(parseDouble(x));
@@ -60,7 +66,7 @@ public class ScanMovie {
       try {
         System.out.print("Введите вторую координату: ");
         String y = scanner.nextLine();
-        if (y.isEmpty()) {
+        if (y.trim().isEmpty()) {
           coordinates.setY(null);
         } else {
           coordinates.setY(parseLong(y));
@@ -74,12 +80,13 @@ public class ScanMovie {
     movie.setCoordinates(coordinates);
   }
 
+  /** Устанавливает количество оскаров у фильма */
   public void setOscarsCount() {
     while (true) {
       try {
         System.out.print("Введите количество оскаров: ");
         String count = scanner.nextLine();
-        if (count.isEmpty()) {
+        if (count.trim().isEmpty()) {
           movie.setOscarsCount(0);
         } else {
           movie.setOscarsCount(parseInt(count));
@@ -91,12 +98,13 @@ public class ScanMovie {
     }
   }
 
+  /** Устанавливает продолжительность фильма */
   public void setLength() {
     while (true) {
       try {
         System.out.print("Введите длительность фильма: ");
         String length = scanner.nextLine();
-        if (length.isEmpty()) {
+        if (length.trim().isEmpty()) {
           movie.setLength(0);
         } else {
           movie.setLength(parseInt(length));
@@ -108,6 +116,7 @@ public class ScanMovie {
     }
   }
 
+  /** Устанавливает жанр фильма */
   public void setGenre() {
     while (true) {
       try {
@@ -115,7 +124,12 @@ public class ScanMovie {
             "Введите жанр фильма (возможные значения: "
                 + Arrays.toString(MovieGenre.values())
                 + "): ");
-        movie.setGenre(parseEnum(scanner.nextLine(), MovieGenre.class));
+        String genre = scanner.nextLine().toUpperCase();
+        if (genre.trim().isEmpty()) {
+          movie.setGenre(null);
+        } else {
+          movie.setGenre(parseEnum(genre, MovieGenre.class));
+        }
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
@@ -123,6 +137,7 @@ public class ScanMovie {
     }
   }
 
+  /** Устанавливает mpaa рейтинг фильма (рейтинг по возрасту) */
   public void setMpaaRating() {
     while (true) {
       try {
@@ -130,7 +145,12 @@ public class ScanMovie {
             "Введите рейтинг фильма (возможные значения: "
                 + Arrays.toString(MpaaRating.values())
                 + "): ");
-        movie.setMpaaRating(parseEnum(scanner.nextLine(), MpaaRating.class));
+        String mpaaRating = scanner.nextLine().toUpperCase();
+        if (mpaaRating.trim().isEmpty()) {
+          movie.setMpaaRating(null);
+        } else {
+          movie.setMpaaRating(parseEnum(mpaaRating, MpaaRating.class));
+        }
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");

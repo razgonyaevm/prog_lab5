@@ -1,6 +1,6 @@
 package com.example.toCollection.classes;
 
-import com.example.mainProgram.*;
+import com.example.mainProgram.ParserClass;
 import com.example.toCollection.enums.*;
 import com.example.toCollection.enums.MovieGenre;
 import com.example.toCollection.enums.MpaaRating;
@@ -8,16 +8,17 @@ import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.*;
 
+/** Основной класс, описывающий фильм */
 @Getter
 @EqualsAndHashCode
 @ToString
 public class Movie extends ParserClass implements Comparable<Movie> {
   private static final AtomicLong idGenerator = new AtomicLong(1);
 
-  private Long id; // генерируется автоматически, уникален
+  private Long id;
   private String name;
   private Coordinates coordinates;
-  private LocalDate creationDate; // генерируется автоматически
+  private LocalDate creationDate;
   private int oscarsCount;
   private Integer length;
   @Setter private MovieGenre genre;
@@ -49,6 +50,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     setOperator(operator);
   }
 
+  /** Конструктор для парсинга данных в одну строку */
   public Movie(String parameters) {
     String[] parts = parameters.split(";");
     if (parts.length < 12) {
@@ -72,13 +74,15 @@ public class Movie extends ParserClass implements Comparable<Movie> {
             parseEnum(parts[11], Country.class)));
   }
 
+  /** Устанавливает названия фильма */
   public void setName(String name) {
-    if (name == null || name.isEmpty()) {
+    if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Name cannot be null or empty");
     }
     this.name = name;
   }
 
+  /** Устанавливает координаты фильма (что это вообще значит) */
   public void setCoordinates(Coordinates coordinates) {
     if (coordinates == null) {
       throw new IllegalArgumentException("Coordinates cannot be null");
@@ -86,6 +90,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     this.coordinates = coordinates;
   }
 
+  /** Устанавливает количество оскаров у фильма */
   public void setOscarsCount(int oscarsCount) {
     if (oscarsCount <= 0) {
       throw new IllegalArgumentException("Oscars count must be greater than 0");
@@ -93,6 +98,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     this.oscarsCount = oscarsCount;
   }
 
+  /** Устанавливает продолжительность фильма */
   public void setLength(Integer length) {
     if (length == null || length <= 0) {
       throw new IllegalArgumentException("Length must be greater than 0");
@@ -100,6 +106,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     this.length = length;
   }
 
+  /** Сравнивает фильмы по количеству оскаров (для сортировки по умолчанию) */
   @Override
   public int compareTo(Movie other) {
     return Integer.compare(this.oscarsCount, other.oscarsCount);

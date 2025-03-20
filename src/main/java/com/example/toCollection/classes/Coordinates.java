@@ -2,6 +2,7 @@ package com.example.toCollection.classes;
 
 import lombok.*;
 
+/** Класс координат (знать бы еще, что это) */
 @ToString
 @Getter
 @EqualsAndHashCode
@@ -21,6 +22,7 @@ public class Coordinates {
     this.y = y;
   }
 
+  /** Устанавливает координату X */
   public void setX(double x) {
     if (x <= -817) {
       throw new IllegalArgumentException("X must be greater than -817");
@@ -28,6 +30,7 @@ public class Coordinates {
     this.x = x;
   }
 
+  /** Устанавливает координату Y */
   public void setY(Long y) {
     if (y == null) {
       throw new IllegalArgumentException("Y cannot be null");

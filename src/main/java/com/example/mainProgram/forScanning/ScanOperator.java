@@ -1,4 +1,4 @@
-package com.example.mainProgram;
+package com.example.mainProgram.forScanning;
 
 import static com.example.mainProgram.ParserClass.*;
 
@@ -9,6 +9,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
+/**
+ * Класс для сканирования оператора в виде объекта класса {@link
+ * com.example.toCollection.classes.Person}
+ */
 public class ScanOperator {
   private Scanner scanner;
   @Getter private Person operator;
@@ -35,7 +39,7 @@ public class ScanOperator {
       try {
         System.out.print("Введите рост оператора: ");
         String height = scanner.nextLine();
-        if (height.isEmpty()) {
+        if (height.trim().isEmpty()) {
           operator.setHeight(null);
         } else {
           operator.setHeight(parseLong(height));
@@ -50,7 +54,7 @@ public class ScanOperator {
       try {
         System.out.print("Введите вес оператора: ");
         String weight = scanner.nextLine();
-        if (weight.isEmpty()) {
+        if (weight.trim().isEmpty()) {
           operator.setWeight(0);
         } else {
           operator.setWeight(parseFloat(weight));
@@ -64,10 +68,15 @@ public class ScanOperator {
     while (true) {
       try {
         System.out.println(
-            "Введите цвет глаз оператора: (возможные значения: "
+            "Введите любимый цвет оператора: (возможные значения: "
                 + Arrays.toString(Color.values())
                 + "): ");
-        operator.setEyeColor(parseEnum(scanner.nextLine(), Color.class));
+        String color = scanner.nextLine().toUpperCase();
+        if (color.trim().isEmpty()) {
+          operator.setEyeColor(null);
+        } else {
+          operator.setEyeColor(parseEnum(color, Color.class));
+        }
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
@@ -80,7 +89,12 @@ public class ScanOperator {
             "Введите национальность оператора (возможные значения: "
                 + Arrays.toString(Country.values())
                 + "): ");
-        operator.setNationality(parseEnum(scanner.nextLine(), Country.class));
+        String nationality = scanner.nextLine().toUpperCase();
+        if (nationality.trim().isEmpty()) {
+          operator.setNationality(null);
+        } else {
+          operator.setNationality(parseEnum(nationality, Country.class));
+        }
         break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");

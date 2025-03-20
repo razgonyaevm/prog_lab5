@@ -5,6 +5,7 @@ import static com.example.mainProgram.Commands.commands_list;
 import com.example.mainProgram.forXML.XMLHandler;
 import java.util.*;
 
+/** Основная программа */
 public class Program {
   public static void main(String[] args) {
     if (args.length < 1) {

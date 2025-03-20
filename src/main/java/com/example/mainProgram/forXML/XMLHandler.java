@@ -88,6 +88,7 @@ public class XMLHandler {
     return new LinkedList<>();
   }
 
+  /** Получение коллекции из BufferedReader */
   private LinkedList<Movie> getMovies(BufferedReader br) throws JAXBException {
     JAXBContext context = JAXBContext.newInstance(MovieCollectionWrapper.class);
     Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -100,6 +101,7 @@ public class XMLHandler {
     return movies;
   }
 
+  /** Валидация параметров фильма */
   private void validateMovie(Movie movie) {
     if (movie.getName() == null || movie.getName().trim().isEmpty()) {
       throw new IllegalArgumentException("Movie name cannot be null or empty");

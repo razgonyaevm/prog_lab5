@@ -5,6 +5,7 @@ import com.example.toCollection.enums.Color;
 import com.example.toCollection.enums.Country;
 import lombok.*;
 
+/** Класс, описывающий человека */
 @Getter
 @EqualsAndHashCode
 @ToString
@@ -24,6 +25,7 @@ public class Person extends ParserClass {
     this.nationality = nationality;
   }
 
+  /** Конструктор для парсинга данных в одну строку */
   public Person(String params) {
     String[] paramsArray = params.split(";");
     if (paramsArray.length != 5) {
@@ -38,13 +40,15 @@ public class Person extends ParserClass {
     this.nationality = parseEnum(paramsArray[4], Country.class);
   }
 
+  /** Устанавливает имя */
   public void setName(String name) {
-    if (name == null || name.isEmpty()) {
+    if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Name cannot be null or empty");
     }
     this.name = name;
   }
 
+  /** Устанавливает рост */
   public void setHeight(Long height) {
     if (height == null || height <= 0) {
       throw new IllegalArgumentException("Height must be greater than 0");
@@ -52,6 +56,7 @@ public class Person extends ParserClass {
     this.height = height;
   }
 
+  /** Устанавливает вес */
   public void setWeight(float weight) {
     if (weight <= 0) {
       throw new IllegalArgumentException("Weight must be greater than 0");

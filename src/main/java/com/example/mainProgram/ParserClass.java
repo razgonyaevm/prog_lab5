@@ -1,8 +1,9 @@
 package com.example.mainProgram;
 
+/** Парсинг базовых параметров */
 public class ParserClass {
-  /** Парсинг базовых параметров (static так как не работает с полями класса) */
-  protected static int parseInt(String value) {
+  /** Преобразование строки в число int */
+  public static int parseInt(String value) {
     try {
       return Integer.parseInt(value);
     } catch (NumberFormatException e) {
@@ -10,7 +11,8 @@ public class ParserClass {
     }
   }
 
-  protected static long parseLong(String value) {
+  /** Преобразование строки в число long */
+  public static long parseLong(String value) {
     try {
       return Long.parseLong(value);
     } catch (NumberFormatException e) {
@@ -18,7 +20,8 @@ public class ParserClass {
     }
   }
 
-  protected static float parseFloat(String value) {
+  /** Преобразование строки в число float */
+  public static float parseFloat(String value) {
     try {
       return Float.parseFloat(value);
     } catch (NumberFormatException e) {
@@ -26,7 +29,8 @@ public class ParserClass {
     }
   }
 
-  protected static double parseDouble(String value) {
+  /** Преобразование строки в число double */
+  public static double parseDouble(String value) {
     try {
       return Double.parseDouble(value);
     } catch (NumberFormatException e) {
@@ -34,7 +38,8 @@ public class ParserClass {
     }
   }
 
-  protected static <E extends Enum<E>> E parseEnum(String value, Class<E> enumType) {
+  /** Преобразование строки в enum с заданным типом */
+  public static <E extends Enum<E>> E parseEnum(String value, Class<E> enumType) {
     try {
       return Enum.valueOf(enumType, value);
     } catch (IllegalArgumentException e) {
