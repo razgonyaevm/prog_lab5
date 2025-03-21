@@ -1,10 +1,11 @@
 package com.example.mainProgram;
 
-import static com.example.mainProgram.ParserClass.parseInt;
-import static com.example.mainProgram.ParserClass.parseLong;
+import static com.example.forScanningAndParsing.ParserClass.parseInt;
+import static com.example.forScanningAndParsing.ParserClass.parseLong;
 
-import com.example.mainProgram.forScanning.ScanMovie;
-import com.example.toCollection.classes.Movie;
+import com.example.forCollection.MovieCollection;
+import com.example.forCollection.classes.Movie;
+import com.example.forScanningAndParsing.ScanMovie;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -1,12 +1,12 @@
-package com.example.mainProgram;
+package com.example.forCollection;
 
-import com.example.mainProgram.forXML.XMLHandler;
-import com.example.toCollection.classes.Movie;
+import com.example.forCollection.classes.Movie;
+import com.example.forXML.XMLHandler;
 import java.time.LocalDateTime;
 import java.util.*;
 import lombok.Getter;
 
-/** Класс для управления коллекцией с элементами {@link com.example.toCollection.classes.Movie} */
+/** Класс для управления коллекцией с элементами {@link com.example.forCollection.classes.Movie} */
 @Getter
 public class MovieCollection {
   private final LinkedList<Movie> movies = new LinkedList<>();

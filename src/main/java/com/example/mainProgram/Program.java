@@ -2,7 +2,8 @@ package com.example.mainProgram;
 
 import static com.example.mainProgram.Commands.commands_list;
 
-import com.example.mainProgram.forXML.XMLHandler;
+import com.example.forCollection.MovieCollection;
+import com.example.forXML.XMLHandler;
 import java.util.*;
 
 /** Основная программа */

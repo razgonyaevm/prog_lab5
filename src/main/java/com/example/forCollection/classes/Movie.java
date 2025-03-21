@@ -1,9 +1,10 @@
-package com.example.toCollection.classes;
+package com.example.forCollection.classes;
 
-import com.example.mainProgram.ParserClass;
-import com.example.toCollection.enums.*;
-import com.example.toCollection.enums.MovieGenre;
-import com.example.toCollection.enums.MpaaRating;
+import com.example.forCollection.enums.Color;
+import com.example.forCollection.enums.Country;
+import com.example.forCollection.enums.MovieGenre;
+import com.example.forCollection.enums.MpaaRating;
+import com.example.forScanningAndParsing.ParserClass;
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.*;

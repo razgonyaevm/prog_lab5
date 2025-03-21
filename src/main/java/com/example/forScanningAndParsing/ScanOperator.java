@@ -1,17 +1,17 @@
-package com.example.mainProgram.forScanning;
+package com.example.forScanningAndParsing;
 
-import static com.example.mainProgram.ParserClass.*;
+import static com.example.forScanningAndParsing.ParserClass.*;
 
-import com.example.toCollection.classes.Person;
-import com.example.toCollection.enums.Color;
-import com.example.toCollection.enums.Country;
+import com.example.forCollection.classes.Person;
+import com.example.forCollection.enums.Color;
+import com.example.forCollection.enums.Country;
 import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
 /**
  * Класс для сканирования оператора в виде объекта класса {@link
- * com.example.toCollection.classes.Person}
+ * com.example.forCollection.classes.Person}
  */
 public class ScanOperator {
   private Scanner scanner;

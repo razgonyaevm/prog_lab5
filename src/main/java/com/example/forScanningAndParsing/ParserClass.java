@@ -1,4 +1,4 @@
-package com.example.mainProgram;
+package com.example.forScanningAndParsing;
 
 /** Парсинг базовых параметров */
 public class ParserClass {

@@ -1,16 +1,16 @@
-package com.example.mainProgram.forScanning;
+package com.example.forScanningAndParsing;
 
-import static com.example.mainProgram.ParserClass.*;
+import static com.example.forScanningAndParsing.ParserClass.*;
 
-import com.example.toCollection.classes.*;
-import com.example.toCollection.enums.*;
+import com.example.forCollection.classes.*;
+import com.example.forCollection.enums.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
 /**
  * Класс для сканирования и создания экземпляров класса {@link
- * com.example.toCollection.classes.Movie}
+ * com.example.forCollection.classes.Movie}
  */
 public class ScanMovie {
   @Getter private Movie movie;

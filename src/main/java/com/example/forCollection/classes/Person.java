@@ -1,8 +1,8 @@
-package com.example.toCollection.classes;
+package com.example.forCollection.classes;
 
-import com.example.mainProgram.ParserClass;
-import com.example.toCollection.enums.Color;
-import com.example.toCollection.enums.Country;
+import com.example.forCollection.enums.Color;
+import com.example.forCollection.enums.Country;
+import com.example.forScanningAndParsing.ParserClass;
 import lombok.*;
 
 /** Класс, описывающий человека */

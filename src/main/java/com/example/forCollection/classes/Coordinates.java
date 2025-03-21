@@ -1,4 +1,4 @@
-package com.example.toCollection.classes;
+package com.example.forCollection.classes;
 
 import lombok.*;
 

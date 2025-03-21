@@ -1,4 +1,4 @@
-package com.example.toCollection.enums;
+package com.example.forCollection.enums;
 
 public enum MovieGenre {
   COMEDY,

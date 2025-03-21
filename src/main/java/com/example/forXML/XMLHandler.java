@@ -1,6 +1,6 @@
-package com.example.mainProgram.forXML;
+package com.example.forXML;
 
-import com.example.toCollection.classes.Movie;
+import com.example.forCollection.classes.Movie;
 import jakarta.xml.bind.*;
 import java.io.*;
 import java.net.URISyntaxException;
