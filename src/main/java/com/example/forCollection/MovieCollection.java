@@ -43,7 +43,11 @@ public class MovieCollection {
 
   /** Выводит все элементы коллекции в строковом представлении */
   public void show() {
-    movies.forEach(System.out::println);
+    for (int i = 0; i < movies.size(); i++) {
+      Movie movie = movies.get(i);
+      System.out.println(
+          "\u001B[3;32m" + "Коллекция " + (i + 1) + ": " + "\u001B[0m" + movie + "\n");
+    }
   }
 
   /** Меняет порядок элементов коллекции на противоположный */
@@ -56,7 +60,7 @@ public class MovieCollection {
     if (index >= 0 && index < movies.size()) {
       movies.remove(index);
     } else {
-      System.out.println("Неверный индекс.");
+      System.out.println("\u001B[31mНеверный индекс.\u001B[0m");
     }
   }
 
@@ -70,7 +74,7 @@ public class MovieCollection {
   /** Выводит сумму значений поля length для всех элементов коллекции */
   public void sumOfLength() {
     int sum = movies.stream().mapToInt(Movie::getLength).sum();
-    System.out.println("Сумма length: " + sum);
+    System.out.println("\u001B[3;32mСумма length:\u001B[0m " + sum);
   }
 
   /** Выводит количество элементов, у которых имя оператора равно заданному */
@@ -79,7 +83,8 @@ public class MovieCollection {
         movies.stream()
             .filter(m -> Objects.equals(m.getOperator().getName(), operatorName))
             .count();
-    System.out.println("Количество фильмов оператора " + operatorName + ": " + count);
+    System.out.println(
+        "\u001B[3;32mКоличество фильмов оператора\u001B[0m " + operatorName + ": " + count);
   }
 
   /** Выводит количество оскаров у всех фильмов в порядке убывания */
@@ -105,5 +110,6 @@ public class MovieCollection {
   public void save() {
     XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
     xmlHandler.save(movies);
+    System.out.println("\u001B[1;34mКоллекция сохранена\u001B[0m");
   }
 }

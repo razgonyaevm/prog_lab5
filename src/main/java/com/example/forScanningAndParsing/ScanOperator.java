@@ -14,8 +14,8 @@ import lombok.Getter;
  * com.example.forCollection.classes.Person}
  */
 public class ScanOperator {
-  private Scanner scanner;
-  @Getter private Person operator;
+  private final Scanner scanner;
+  @Getter private final Person operator;
 
   public ScanOperator(Scanner scanner) {
     this.scanner = scanner;
@@ -27,7 +27,7 @@ public class ScanOperator {
   public void setOperator() {
     while (true) {
       try {
-        System.out.print("Введите имя оператора: ");
+        System.out.print("\u001B[3;32mВведите имя оператора: \u001B[0m");
         operator.setName(scanner.nextLine());
         break;
       } catch (IllegalArgumentException e) {
@@ -37,10 +37,10 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.print("Введите рост оператора: ");
+        System.out.print("\u001B[3;32mВведите рост оператора: \u001B[0m");
         String height = scanner.nextLine();
         if (height.trim().isEmpty()) {
-          operator.setHeight(null);
+          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           operator.setHeight(parseLong(height));
         }
@@ -52,7 +52,7 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.print("Введите вес оператора: ");
+        System.out.print("\u001B[3;32mВведите вес оператора: \u001B[0m");
         String weight = scanner.nextLine();
         if (weight.trim().isEmpty()) {
           operator.setWeight(0);
@@ -68,9 +68,9 @@ public class ScanOperator {
     while (true) {
       try {
         System.out.println(
-            "Введите любимый цвет оператора: (возможные значения: "
+            "\u001B[3;32mВведите любимый цвет оператора: (возможные значения: "
                 + Arrays.toString(Color.values())
-                + "): ");
+                + "): \u001B[0m");
         String color = scanner.nextLine().toUpperCase();
         if (color.trim().isEmpty()) {
           operator.setEyeColor(null);
@@ -86,9 +86,9 @@ public class ScanOperator {
     while (true) {
       try {
         System.out.println(
-            "Введите национальность оператора (возможные значения: "
+            "\u001B[3;32mВведите национальность оператора (возможные значения: "
                 + Arrays.toString(Country.values())
-                + "): ");
+                + "): \u001B[0m");
         String nationality = scanner.nextLine().toUpperCase();
         if (nationality.trim().isEmpty()) {
           operator.setNationality(null);

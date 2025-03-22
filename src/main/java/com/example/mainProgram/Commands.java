@@ -77,7 +77,8 @@ public class Commands {
         break;
 
       default:
-        System.out.println("Ошибка в команде. Для вывода справки, воспользуйтесь командой help");
+        System.out.println(
+            "\u001B[3;33mОшибка в команде. Для вывода справки, воспользуйтесь командой help\u001B[0m");
     }
   }
 
@@ -86,21 +87,37 @@ public class Commands {
     System.out.println(
         """
                             Доступные команды:
+
                             help : вывести справку по доступным командам
+
                             info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+
                             show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
+
                             add {element} : добавить новый элемент в коллекцию
+
                             update id {element} : обновить значение элемента коллекции, id которого равен заданному
+
                             remove_by_id id : удалить элемент из коллекции по его id
+
                             clear : очистить коллекцию
+
                             save : сохранить коллекцию в файл
+
                             execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме. Команды выполняются с исходной коллекцией
+
                             exit : завершить программу (без сохранения в файл)
+
                             remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)
+
                             remove_first : удалить первый элемент из коллекции
+
                             reorder : отсортировать коллекцию в порядке, обратном нынешнему
+
                             sum_of_length : вывести сумму значений поля length для всех элементов коллекции
+
                             count_by_operator operator : вывести количество элементов, значение поля operator которых равно заданному (вводится имя оператора)
+
                             print_field_descending_oscars_count : вывести значения поля oscarsCount всех элементов в порядке убывания
                             """);
   }
@@ -115,7 +132,8 @@ public class Commands {
   /** Добавление элемента в коллекцию */
   public static void add(String command, MovieCollection collection, Scanner scanner) {
     if (command.split(" ").length != 1) {
-      System.out.println("Ошибка: слишком много параметров");
+      System.out.println(
+          "\u001B[31mОшибка\u001B[0m:\u001B[33m в команде add не должно быть параметров\u001B[0m");
       return;
     }
     try {
@@ -129,7 +147,7 @@ public class Commands {
   /** Обновление элемента в коллекции по его id */
   public static void update(String command, MovieCollection collection, Scanner scanner) {
     if (command.split(" ").length != 2) {
-      System.out.println("Ошибка: укажите id");
+      System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
     try {
@@ -143,7 +161,7 @@ public class Commands {
   /** Удаление элемента из коллекции по его id */
   public static void removeById(String command, MovieCollection collection) {
     if (command.split(" ").length != 2) {
-      System.out.println("Ошибка: укажите id");
+      System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
     collection.removeById(parseLong(command.split(" ")[1]));
@@ -152,7 +170,7 @@ public class Commands {
   /** Удаление элемента из коллекции по индексу */
   public static void removeAt(String command, MovieCollection collection) {
     if (command.split(" ").length != 2) {
-      System.out.println("Ошибка: укажите id");
+      System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
     collection.removeAt(parseInt(command.split(" ")[1]));
@@ -161,7 +179,7 @@ public class Commands {
   /** Подсчет количества фильмов, у которых имя оператора равно заданному */
   public static void countByOperator(String command, MovieCollection collection) {
     if (command.length() <= 18) {
-      System.out.println("Укажите имя оператора");
+      System.out.println("\u001B[31mОшибка\u001B[0m: \u001B[33m укажите имя оператора\u001B[0m");
       return;
     }
     collection.countByOperator(command.substring(18));
@@ -170,7 +188,7 @@ public class Commands {
   /** Выполнение скрипта, хранящегося в директории с jar архивом (./resources/scripts/) */
   public static void executeScript(String command, MovieCollection fileCollection) {
     if (command.split(" ").length != 2) {
-      System.out.println("Ошибка: укажите имя файла");
+      System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите имя файла\u001B[0m");
       return;
     }
 
@@ -182,9 +200,9 @@ public class Commands {
         commands_list(command_script, fileCollection, fileScanner);
       }
     } catch (FileNotFoundException e) {
-      System.out.println("Файл не найден");
+      System.out.println("\u001B[31mФайл не найден\u001B[0m");
     } catch (Exception e) {
-      System.out.println("Ошибка выполнения скрипта: " + e.getMessage());
+      System.out.println("\u001B[31mОшибка выполнения скрипта: \u001B[0m" + e.getMessage());
     }
   }
 }

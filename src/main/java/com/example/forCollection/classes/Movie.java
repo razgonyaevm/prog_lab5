@@ -11,15 +11,15 @@ import lombok.*;
 
 /** Основной класс, описывающий фильм */
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString
 public class Movie extends ParserClass implements Comparable<Movie> {
   private static final AtomicLong idGenerator = new AtomicLong(1);
 
-  private Long id;
+  private final Long id;
   private String name;
   private Coordinates coordinates;
-  private LocalDate creationDate;
+  private final LocalDate creationDate;
   private int oscarsCount;
   private Integer length;
   @Setter private MovieGenre genre;
@@ -56,7 +56,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     String[] parts = parameters.split(";");
     if (parts.length < 12) {
       throw new IllegalArgumentException(
-          "Invalid parameter string: expected 12, got " + parts.length);
+          "\u001B[31mInvalid parameter string: expected 12, got \u001B[0m" + parts.length);
     }
     this.id = idGenerator.getAndIncrement();
     this.creationDate = LocalDate.now();
@@ -78,7 +78,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   /** Устанавливает названия фильма */
   public void setName(String name) {
     if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("Name cannot be null or empty");
+      throw new IllegalArgumentException("\u001B[31mName cannot be null or empty\u001B[0m");
     }
     this.name = name;
   }
@@ -86,7 +86,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   /** Устанавливает координаты фильма (что это вообще значит) */
   public void setCoordinates(Coordinates coordinates) {
     if (coordinates == null) {
-      throw new IllegalArgumentException("Coordinates cannot be null");
+      throw new IllegalArgumentException("\u001B[31mCoordinates cannot be null\u001B[0m");
     }
     this.coordinates = coordinates;
   }
@@ -94,7 +94,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   /** Устанавливает количество оскаров у фильма */
   public void setOscarsCount(int oscarsCount) {
     if (oscarsCount <= 0) {
-      throw new IllegalArgumentException("Oscars count must be greater than 0");
+      throw new IllegalArgumentException("\u001B[31mOscars count must be greater than 0\u001B[31m");
     }
     this.oscarsCount = oscarsCount;
   }
@@ -102,7 +102,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   /** Устанавливает продолжительность фильма */
   public void setLength(Integer length) {
     if (length == null || length <= 0) {
-      throw new IllegalArgumentException("Length must be greater than 0");
+      throw new IllegalArgumentException("\u001B[31mLength must be greater than 0\u001B[0m");
     }
     this.length = length;
   }

@@ -27,7 +27,7 @@ public class XMLHandler {
               .getParent();
       this.filePath = jarPath + "/resources/xml/" + filePath;
     } catch (URISyntaxException e) {
-      System.err.println("Ошибка: некорректный URI!");
+      System.err.println("\u001B[31mОшибка: некорректный URI!\u001B[0m");
     }
 
     File file = new File(filePath);
@@ -45,7 +45,7 @@ public class XMLHandler {
 
       marshaller.marshal(wrapper, osw);
     } catch (Exception e) {
-      System.out.println("Ошибка при сохранении XML: " + e.getMessage());
+      System.out.println("\u001B[31mОшибка при сохранении XML: \u001B[0m" + e.getMessage());
     }
   }
 
@@ -53,7 +53,7 @@ public class XMLHandler {
   public LinkedList<Movie> load_jar() {
     try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
       if (inputStream == null) {
-        System.out.println("Файл не найден");
+        System.out.println("\u001B[31mФайл не найден\u001B[0m");
         return new LinkedList<>();
       }
 
@@ -65,7 +65,7 @@ public class XMLHandler {
       }
 
     } catch (Exception e) {
-      System.out.println("Ошибка загрузки XML: " + e.getMessage());
+      System.out.println("\u001B[31mОшибка загрузки XML: \u001B[0m" + e.getMessage());
       return new LinkedList<>();
     }
   }
@@ -78,11 +78,11 @@ public class XMLHandler {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
       return getMovies(br);
     } catch (FileNotFoundException e) {
-      System.out.println("Файл не найден");
+      System.out.println("\u001B[31mФайл не найден\u001B[0m");
     } catch (IOException e) {
-      System.out.println("Ошибка при чтении файла: " + e.getMessage());
+      System.out.println("\u001B[31mОшибка при чтении файла: \u001B[0m" + e.getMessage());
     } catch (Exception e) {
-      System.out.println("Ошибка загрузки XML: " + e.getMessage());
+      System.out.println("\u001B[31mОшибка загрузки XML: \u001B[0m" + e.getMessage());
       return new LinkedList<>();
     }
     return new LinkedList<>();
@@ -104,16 +104,17 @@ public class XMLHandler {
   /** Валидация параметров фильма */
   private void validateMovie(Movie movie) {
     if (movie.getName() == null || movie.getName().trim().isEmpty()) {
-      throw new IllegalArgumentException("Movie name cannot be null or empty");
+      throw new IllegalArgumentException("\u001B[31mMovie name cannot be null or empty\u001B[0m");
     }
     if (movie.getCoordinates() == null) {
-      throw new IllegalArgumentException("Movie coordinates cannot be null");
+      throw new IllegalArgumentException("\u001B[31mMovie coordinates cannot be null\u001B[0m");
     }
     if (movie.getOscarsCount() <= 0) {
-      throw new IllegalArgumentException("Oscars count must be a positive number");
+      throw new IllegalArgumentException(
+          "\u001B[31mOscars count must be a positive number\u001B[0m");
     }
     if (movie.getLength() == null || movie.getLength() <= 0) {
-      throw new IllegalArgumentException("Length must be a positive number");
+      throw new IllegalArgumentException("\u001B[31mLength must be a positive number\u001B[0m");
     }
   }
 }
