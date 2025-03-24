@@ -55,8 +55,8 @@ public class ScanMovie {
           System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           coordinates.setX(parseDouble(x));
+          break;
         }
-        break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
       }
@@ -70,8 +70,8 @@ public class ScanMovie {
           System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           coordinates.setY(parseLong(y));
+          break;
         }
-        break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
       }
@@ -90,8 +90,8 @@ public class ScanMovie {
           System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           movie.setOscarsCount(parseInt(count));
+          break;
         }
-        break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
       }
@@ -108,8 +108,8 @@ public class ScanMovie {
           System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           movie.setLength(parseInt(length));
+          break;
         }
-        break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
       }

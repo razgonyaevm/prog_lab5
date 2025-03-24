@@ -43,8 +43,8 @@ public class ScanOperator {
           System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
         } else {
           operator.setHeight(parseLong(height));
+          break;
         }
-        break;
       } catch (IllegalArgumentException e) {
         System.out.println(e.getMessage() + "\n");
       }

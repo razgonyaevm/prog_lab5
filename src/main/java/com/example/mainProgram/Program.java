@@ -14,22 +14,25 @@ import java.util.*;
 public class Program {
   public static void main(String[] args) {
     MovieCollection collection = new MovieCollection();
+    int index = 0;
     if (args.length < 1) {
       System.out.println(
           "\u001B[31mОшибка\u001B[0m: \u001B[33mукажите файл для загрузки данных\u001B[0m");
       return;
     }
 
-    if (!args[0].contains(".xml")) {
+    if (Objects.equals(args[0], "jar")) index = 1;
+
+    if (!args[index].contains(".xml")) {
       System.out.println(
           "\u001B[31mОшибка\u001B[0m: \u001B[33mукажите файл с расширением .xml\u001B[0m");
       return;
     }
 
-    if (args[0].contains("jar")) {
+    if (index == 1) {
       System.out.println("\u001B[3;34mЗагрузка из jar-файла\u001B[0m");
       String filePath = args[1];
-      XMLHandler xmlHandler = new XMLHandler("./resources/xml/" + filePath);
+      XMLHandler xmlHandler = new XMLHandler("xml/" + filePath);
 
       collection.setMovies(xmlHandler.load_jar());
     } else {
