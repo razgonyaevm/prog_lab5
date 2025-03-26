@@ -2,8 +2,10 @@ package com.example.forScanningAndParsing;
 
 import static com.example.forScanningAndParsing.ParserClass.*;
 
-import com.example.forCollection.classes.*;
-import com.example.forCollection.enums.*;
+import com.example.forCollection.classes.Coordinates;
+import com.example.forCollection.classes.Movie;
+import com.example.forCollection.enums.MovieGenre;
+import com.example.forCollection.enums.MpaaRating;
 import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;

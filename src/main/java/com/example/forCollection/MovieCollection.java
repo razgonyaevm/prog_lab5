@@ -3,7 +3,10 @@ package com.example.forCollection;
 import com.example.forCollection.classes.Movie;
 import com.example.forXML.XMLHandler;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Objects;
 import lombok.Getter;
 
 /** Класс для управления коллекцией с элементами {@link com.example.forCollection.classes.Movie} */

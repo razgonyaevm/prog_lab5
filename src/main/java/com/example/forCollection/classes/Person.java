@@ -3,7 +3,11 @@ package com.example.forCollection.classes;
 import com.example.forCollection.enums.Color;
 import com.example.forCollection.enums.Country;
 import com.example.forScanningAndParsing.ParserClass;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /** Класс, описывающий человека */
 @Getter

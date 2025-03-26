@@ -1,6 +1,9 @@
 package com.example.forCollection.classes;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /** Класс координат (знать бы еще, что это) */
 @ToString

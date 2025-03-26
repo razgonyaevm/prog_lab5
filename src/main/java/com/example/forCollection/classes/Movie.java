@@ -7,7 +7,10 @@ import com.example.forCollection.enums.MpaaRating;
 import com.example.forScanningAndParsing.ParserClass;
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /** Основной класс, описывающий фильм */
 @Getter
