@@ -118,6 +118,7 @@ public class MovieCollection {
     System.out.println("\u001B[1;34mКоллекция сохранена\u001B[0m");
   }
 
+  /** Возвращает элемент коллекции по индексу */
   public Movie get(int index) {
     return movies.get(index);
   }
