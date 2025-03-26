@@ -22,16 +22,13 @@ public class MovieCollection {
 
   /** Устанавливает новый элемент на место с индексом id */
   public void update(long id, Movie newMovie) {
-    if (id <= 0) {
-      throw new IllegalArgumentException("ID must be greater than 0");
-    }
+    newMovie.setId(id);
     for (int i = 0; i < movies.size(); i++) {
       if (movies.get(i).getId().equals(id)) {
         movies.set(i, newMovie);
         return;
       }
     }
-    System.out.println("Фильм с таким ID не найден.");
   }
 
   /** Удаляет элемент по значению его id */
@@ -114,5 +111,9 @@ public class MovieCollection {
     XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
     xmlHandler.save(movies);
     System.out.println("\u001B[1;34mКоллекция сохранена\u001B[0m");
+  }
+
+  public Movie get(int index) {
+    return movies.get(index);
   }
 }

@@ -150,12 +150,21 @@ public class Commands {
       System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
-    try {
-      Movie movie_update = new ScanMovie(scanner).getMovie();
-      collection.update(parseLong(command.split(" ")[1]), movie_update);
-    } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage());
+    long id = parseLong(command.split(" ")[1]);
+    if (id <= 0) {
+      System.out.println("\u001B[31mID must be greater than 0\u001B[0m");
     }
+    for (int i = 0; i < collection.size(); i++) {
+      if (collection.get(i).getId().equals(id)) {
+        break;
+      }
+      if (i == collection.size() - 1) {
+        System.out.println("Фильм с таким ID не найден.");
+        return;
+      }
+    }
+    Movie movie_update = new ScanMovie(scanner).getMovie();
+    collection.update(parseLong(command.split(" ")[1]), movie_update);
   }
 
   /** Удаление элемента из коллекции по его id */

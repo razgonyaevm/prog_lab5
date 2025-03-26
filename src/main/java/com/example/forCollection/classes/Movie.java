@@ -19,7 +19,7 @@ import lombok.ToString;
 public class Movie extends ParserClass implements Comparable<Movie> {
   private static final AtomicLong idGenerator = new AtomicLong(1);
 
-  private final Long id;
+  @Setter private Long id;
   private String name;
   private Coordinates coordinates;
   private final LocalDate creationDate;
