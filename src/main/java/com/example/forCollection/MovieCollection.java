@@ -48,6 +48,9 @@ public class MovieCollection {
       System.out.println(
           "\u001B[3;32m" + "Коллекция " + (i + 1) + ": " + "\u001B[0m" + movie + "\n");
     }
+    if (movies.isEmpty()) {
+      System.out.println("\u001B[3;32mВ коллекции нет элементов\u001B[0m");
+    }
   }
 
   /** Меняет порядок элементов коллекции на противоположный */
@@ -60,7 +63,7 @@ public class MovieCollection {
     if (index >= 0 && index < movies.size()) {
       movies.remove(index);
     } else {
-      System.out.println("\u001B[31mНеверный индекс.\u001B[0m");
+      System.out.println("\u001B[31mОшибка: неверный индекс\u001B[0m");
     }
   }
 
@@ -68,6 +71,8 @@ public class MovieCollection {
   public void removeFirst() {
     if (!movies.isEmpty()) {
       movies.removeFirst();
+    } else {
+      System.out.println("В коллекции нет элементов");
     }
   }
 

@@ -42,6 +42,7 @@ public class Commands {
 
       case "clear":
         collection.clear();
+        System.out.println("\u001B[1;34mКоллекция очищена\u001B[0m");
         break;
 
       case "save":
@@ -150,30 +151,39 @@ public class Commands {
       System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
-    long id = parseLong(command.split(" ")[1]);
-    if (id <= 0) {
-      System.out.println("\u001B[31mID must be greater than 0\u001B[0m");
-    }
-    for (int i = 0; i < collection.size(); i++) {
-      if (collection.get(i).getId().equals(id)) {
-        break;
+    try {
+      long id = parseLong(command.split(" ")[1]);
+      if (id <= 0) {
+        System.out.println("\u001B[31mID must be greater than 0\u001B[0m");
+      } else {
+        for (int i = 0; i < collection.size(); i++) {
+          if (collection.get(i).getId().equals(id)) {
+            break;
+          }
+          if (i == collection.size() - 1) {
+            System.out.println("Фильм с таким ID не найден.");
+            return;
+          }
+        }
+        Movie movie_update = new ScanMovie(scanner).getMovie();
+        collection.update(parseLong(command.split(" ")[1]), movie_update);
       }
-      if (i == collection.size() - 1) {
-        System.out.println("Фильм с таким ID не найден.");
-        return;
-      }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
-    Movie movie_update = new ScanMovie(scanner).getMovie();
-    collection.update(parseLong(command.split(" ")[1]), movie_update);
   }
 
   /** Удаление элемента из коллекции по его id */
   public static void removeById(String command, MovieCollection collection) {
-    if (command.split(" ").length != 2) {
-      System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
-      return;
+    try {
+      if (command.split(" ").length != 2) {
+        System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
+        return;
+      }
+      collection.removeById(parseLong(command.split(" ")[1]));
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
-    collection.removeById(parseLong(command.split(" ")[1]));
   }
 
   /** Удаление элемента из коллекции по индексу */
@@ -182,7 +192,11 @@ public class Commands {
       System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите id\u001B[0m");
       return;
     }
-    collection.removeAt(parseInt(command.split(" ")[1]));
+    try {
+      collection.removeAt(parseInt(command.split(" ")[1]));
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   /** Подсчет количества фильмов, у которых имя оператора равно заданному */
