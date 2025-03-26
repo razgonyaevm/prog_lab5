@@ -1,0 +1,140 @@
+@startuml
+class com.example.forCollection.classes.Movie {
+- {static} AtomicLong idGenerator
+- Long id
+- String name
+- Coordinates coordinates
+- LocalDate creationDate
+- int oscarsCount
+- Integer length
+- MovieGenre genre
+- MpaaRating mpaaRating
+- Person operator
++ void setName(String)
++ void setCoordinates(Coordinates)
++ void setOscarsCount(int)
++ void setLength(Integer)
++ int compareTo(Movie)
+}
+
+class com.example.forCollection.classes.Person {
+- String name
+- Long height
+- float weight
+- Color eyeColor
+- Country nationality
++ void setName(String)
++ void setHeight(Long)
++ void setWeight(float)
+}
+
+class com.example.forScanningAndParsing.ParserClass {
++ {static} int parseInt(String)
++ {static} long parseLong(String)
++ {static} float parseFloat(String)
++ {static} double parseDouble(String)
++ {static} E parseEnum(String,Class<E>)
+}
+
+class com.example.mainProgram.Program {
++ {static} void main(String[])
+}
+
+class com.example.forScanningAndParsing.ScanOperator {
+- Scanner scanner
+- Person operator
++ void setOperator()
+}
+
+class com.example.forScanningAndParsing.ScanMovie {
+- Movie movie
+- Coordinates coordinates
+- Scanner scanner
++ void setName()
++ void setCoordinates()
++ void setOscarsCount()
++ void setLength()
++ void setGenre()
++ void setMpaaRating()
+}
+
+class com.example.forCollection.MovieCollection {
+- LinkedList<Movie> movies
+- LocalDateTime initializationDate
++ void add(Movie)
++ void update(long,Movie)
++ void removeById(long)
++ void clear()
++ void show()
++ void reorder()
++ void removeAt(int)
++ void removeFirst()
++ void sumOfLength()
++ void countByOperator(String)
++ void printDescendingOscarsCount()
++ void setMovies(LinkedList<Movie>)
++ int size()
++ void save()
+}
+
+enum com.example.forCollection.enums.MpaaRating {
++  G
++  PG_13
++  NC_17
+}
+
+class com.example.forXML.MovieCollectionWrapper {
+- LinkedList<Movie> movies
++ LinkedList<Movie> getMovies()
+}
+
+enum com.example.forCollection.enums.Country {
++  FRANCE
++  SPAIN
++  NORTH_KOREA
+}
+
+enum com.example.forCollection.enums.Color {
++  YELLOW
++  ORANGE
++  WHITE
+}
+
+class com.example.forXML.XMLHandler {
+- String filePath
++ void save(LinkedList<Movie>)
++ LinkedList<Movie> load_jar()
++ LinkedList<Movie> load_local()
+- LinkedList<Movie> getMovies(BufferedReader)
+- void validateMovie(Movie)
+}
+
+class com.example.forCollection.classes.Coordinates {
+- double x
+- Long y
++ void setX(double)
++ void setY(Long)
+}
+
+enum com.example.forCollection.enums.MovieGenre {
++  COMEDY
++  MUSICAL
++  THRILLER
++  HORROR
+}
+
+com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Movie
+com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Person
+
+' Добавление класса Program
+class com.example.mainProgram.Program {
++ {static} void main(String[])
+}
+
+' Добавление связи с MovieCollection
+com.example.mainProgram.Program ..> com.example.forCollection.MovieCollection : "Загружает и управляет коллекцией фильмов"
+com.example.mainProgram.Program ..> com.example.forXML.XMLHandler : "Использует XMLHandler для загрузки и сохранения данных xml"
+com.example.mainProgram.Program ..> com.example.forScanningAndParsing.ParserClass : "Использует парсер для обработки входных данных"
+com.example.mainProgram.Program ..> com.example.forScanningAndParsing.ScanMovie : "Использует ScanMovie для получения данных о фильмах"
+
+@enduml
