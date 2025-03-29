@@ -4,7 +4,6 @@ import com.example.forCollection.classes.Movie;
 import jakarta.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import lombok.Setter;
 
 /** Класс-обертка для реализации Movie в XML */
