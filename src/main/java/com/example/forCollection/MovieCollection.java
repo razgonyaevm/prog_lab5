@@ -3,16 +3,13 @@ package com.example.forCollection;
 import com.example.forCollection.classes.Movie;
 import com.example.forXML.XMLHandler;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 import lombok.Getter;
 
 /** Класс для управления коллекцией с элементами {@link com.example.forCollection.classes.Movie} */
 @Getter
 public class MovieCollection {
-  private final LinkedList<Movie> movies = new LinkedList<>();
+  private final List<Movie> movies = new LinkedList<>();
   private final LocalDateTime initializationDate = LocalDateTime.now();
 
   /** Добавляет элемент в коллекцию */
@@ -114,7 +111,7 @@ public class MovieCollection {
   /** Сохраняет коллекцию в файл save_movies.xml */
   public void save() {
     XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
-    xmlHandler.save(movies);
+    xmlHandler.save((LinkedList<Movie>) movies);
     System.out.println("\u001B[1;34mКоллекция сохранена\u001B[0m");
   }
 
