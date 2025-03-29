@@ -20,9 +20,11 @@ public class MovieCollection {
   /** Устанавливает новый элемент на место с индексом id */
   public void update(long id, Movie newMovie) {
     newMovie.setId(id);
-    for (int i = 0; i < movies.size(); i++) {
-      if (movies.get(i).getId().equals(id)) {
-        movies.set(i, newMovie);
+
+    ListIterator<Movie> iterator = movies.listIterator();
+    while (iterator.hasNext()) {
+      if (iterator.next().getId().equals(id)) {
+        iterator.set(newMovie);
         return;
       }
     }
@@ -40,10 +42,10 @@ public class MovieCollection {
 
   /** Выводит все элементы коллекции в строковом представлении */
   public void show() {
-    for (int i = 0; i < movies.size(); i++) {
-      Movie movie = movies.get(i);
-      System.out.println(
-          "\u001B[3;32m" + "Коллекция " + (i + 1) + ": " + "\u001B[0m" + movie + "\n");
+    int index = 1; // Нумерация начинается с 1
+    for (Movie movie : movies) {
+      System.out.println("\u001B[3;32m" + "Фильм " + index + ": " + "\u001B[0m" + movie + "\n");
+      index++;
     }
     if (movies.isEmpty()) {
       System.out.println("\u001B[3;32mВ коллекции нет элементов\u001B[0m");
