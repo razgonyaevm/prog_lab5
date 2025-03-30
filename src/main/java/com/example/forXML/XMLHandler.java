@@ -3,7 +3,6 @@ package com.example.forXML;
 import com.example.forCollection.classes.Movie;
 import jakarta.xml.bind.*;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 
@@ -12,23 +11,14 @@ import java.util.LinkedList;
  * href="https://javarush.com/quests/lectures/questcollections.level03.lecture07">JavaRush</a>
  */
 public class XMLHandler {
-  private String filePath;
+  private final String filePath;
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
   }
 
-  /** Сохранение коллекции в файл, хранящийся в директории с jar архивом (./resources/xml/) */
+  /** Сохранение коллекции в файл (пользователь сам прописывает путь до файла) */
   public void save(LinkedList<Movie> movies) {
-    try {
-      // Получаем путь к JAR-файлу
-      String jarPath =
-          new File(XMLHandler.class.getProtectionDomain().getCodeSource().getLocation().toURI())
-              .getParent();
-      this.filePath = jarPath + "/resources/xml/" + filePath;
-    } catch (URISyntaxException e) {
-      System.err.println("\u001B[31mОшибка: некорректный URI!\u001B[0m");
-    }
 
     File file = new File(filePath);
 
@@ -70,10 +60,7 @@ public class XMLHandler {
     }
   }
 
-  /**
-   * Загрузка коллекции из локального репозитория, хранящегося в директории с jar архивом
-   * (./resources/xml/)
-   */
+  /** Загрузка коллекции из локального репозитория */
   public LinkedList<Movie> loadLocal() {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
       return getMovies(br);

@@ -38,7 +38,7 @@ public class Program {
     } else {
 
       String filePath = args[0];
-      XMLHandler xmlHandler = new XMLHandler("./resources/xml/" + filePath);
+      XMLHandler xmlHandler = new XMLHandler(filePath);
       collection.setMovies(xmlHandler.loadLocal());
     }
     Scanner scanner = new Scanner(System.in);

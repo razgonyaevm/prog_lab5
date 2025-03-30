@@ -208,15 +208,14 @@ public class Commands {
     collection.countByOperator(command.substring(18));
   }
 
-  /** Выполнение скрипта, хранящегося в директории с jar архивом (./resources/scripts/) */
+  /** Выполнение скрипта */
   public static void executeScript(String command, MovieCollection fileCollection) {
     if (command.split(" ").length != 2) {
       System.out.println("\u001B[31mОшибка\u001B[0m:\u001B[33m укажите имя файла\u001B[0m");
       return;
     }
 
-    try (BufferedReader br =
-        new BufferedReader(new FileReader("./resources/scripts/" + command.split(" ")[1]))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(command.split(" ")[1]))) {
       Scanner fileScanner = new Scanner(br);
       while (fileScanner.hasNextLine()) {
         String command_script = fileScanner.nextLine();
