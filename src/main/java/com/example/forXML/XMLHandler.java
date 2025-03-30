@@ -50,7 +50,7 @@ public class XMLHandler {
   }
 
   /** Загрузка коллекции из JAR-файла */
-  public LinkedList<Movie> load_jar() {
+  public LinkedList<Movie> loadJar() {
     try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
       if (inputStream == null) {
         System.out.println("\u001B[31mФайл не найден\u001B[0m");
@@ -74,7 +74,7 @@ public class XMLHandler {
    * Загрузка коллекции из локального репозитория, хранящегося в директории с jar архивом
    * (./resources/xml/)
    */
-  public LinkedList<Movie> load_local() {
+  public LinkedList<Movie> loadLocal() {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
       return getMovies(br);
     } catch (FileNotFoundException e) {

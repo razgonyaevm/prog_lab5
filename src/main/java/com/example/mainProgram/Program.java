@@ -34,12 +34,12 @@ public class Program {
       String filePath = args[1];
       XMLHandler xmlHandler = new XMLHandler("xml/" + filePath);
 
-      collection.setMovies(xmlHandler.load_jar());
+      collection.setMovies(xmlHandler.loadJar());
     } else {
 
       String filePath = args[0];
       XMLHandler xmlHandler = new XMLHandler("./resources/xml/" + filePath);
-      collection.setMovies(xmlHandler.load_local());
+      collection.setMovies(xmlHandler.loadLocal());
     }
     Scanner scanner = new Scanner(System.in);
     while (true) {
