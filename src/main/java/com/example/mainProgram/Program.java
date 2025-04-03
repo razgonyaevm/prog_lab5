@@ -1,9 +1,9 @@
 package com.example.mainProgram;
 
-import static com.example.mainProgram.Commands.commands_list;
-
 import com.example.forCollection.MovieCollection;
 import com.example.forXML.XMLHandler;
+import com.example.mainProgram.forCommands.CommandInvoker;
+import com.example.mainProgram.forCommands.commands.*;
 import java.util.*;
 
 /**
@@ -16,40 +16,68 @@ public class Program {
     MovieCollection collection = new MovieCollection();
     int index = 0;
     if (args.length < 1) {
-      System.out.println(
-          "\u001B[31mОшибка\u001B[0m: \u001B[33mукажите файл для загрузки данных\u001B[0m");
+      System.out.println("Ошибка: укажите файл для загрузки данных");
       return;
     }
 
     if (Objects.equals(args[0], "jar")) index = 1;
 
     if (!args[index].contains(".xml")) {
-      System.out.println(
-          "\u001B[31mОшибка\u001B[0m: \u001B[33mукажите файл с расширением .xml\u001B[0m");
+      System.out.println("Ошибка: укажите файл с расширением .xml");
       return;
     }
 
     if (index == 1) {
-      System.out.println("\u001B[3;34mЗагрузка из jar-файла\u001B[0m");
+      System.out.println("Загрузка из jar-файла");
       String filePath = args[1];
       XMLHandler xmlHandler = new XMLHandler("xml/" + filePath);
 
       collection.setMovies(xmlHandler.loadJar());
     } else {
-
       String filePath = args[0];
       XMLHandler xmlHandler = new XMLHandler(filePath);
       collection.setMovies(xmlHandler.loadLocal());
     }
+
     Scanner scanner = new Scanner(System.in);
-    while (true) {
-      System.out.print("> ");
+    CommandInvoker invoker = new CommandInvoker();
+
+    // Регистрация команд
+    invoker.register("help", new HelpCommand());
+    invoker.register("info", new InfoCommand(collection));
+    invoker.register("add", new AddCommand(collection, scanner));
+    invoker.register("show", new ShowCommand(collection));
+    invoker.register("clear", new ClearCommand(collection));
+    invoker.register("save", new SaveCommand(collection));
+    invoker.register("exit", new ExitCommand());
+    invoker.register("remove_first", new RemoveFirstProgram(collection));
+    invoker.register("reorder", new ReorderCommand(collection));
+    invoker.register("sum_of_length", new SumOfLengthCommand(collection));
+    invoker.register(
+        "print_field_descending_oscars_count", new PrintDescendingOscarsCountCommand(collection));
+
+    while (scanner.hasNextLine()) {
       String command = scanner.nextLine().trim();
-      if (Objects.equals(command.split(" ")[0], "exit")) {
-        System.out.println("\u001B[1;32mПрограмма завершена\u001B[0m");
-        return;
+      notSimpleMethods(command, collection, scanner, invoker);
+    }
+  }
+
+  public static void notSimpleMethods(
+      String command, MovieCollection collection, Scanner scanner, CommandInvoker invoker) {
+    String[] parts = command.split(" ");
+    switch (parts[0]) {
+      case "update" -> invoker.execute(new UpdateCommand(collection, scanner, command));
+      case "execute_script" -> {
+        if (parts.length == 2) {
+          invoker.execute(new ExecuteScriptCommand(collection, parts[1], invoker));
+        } else {
+          System.out.println("Ошибка: укажите имя файла");
+        }
       }
-      commands_list(command, collection, scanner);
+      case "count_by_operator" -> invoker.execute(new CountByOperator(collection, command));
+      case "remove_by_id" -> invoker.execute(new RemoveByIdCommand(collection, command));
+      case "remove_at" -> invoker.execute(new RemoveAtCommand(collection, command));
+      default -> invoker.execute(command);
     }
   }
 }
