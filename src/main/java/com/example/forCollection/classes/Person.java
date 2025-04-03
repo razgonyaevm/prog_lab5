@@ -34,9 +34,8 @@ public class Person extends ParserClass {
     String[] paramsArray = params.split(";");
     if (paramsArray.length != 5) {
       throw new IllegalArgumentException(
-          "\u001B[31mInvalid number of parameters: expected 5, got "
-              + paramsArray.length
-              + "\u001B[0m");
+          "Invalid number of parameters: expected 5, got "
+              + paramsArray.length);
     }
 
     setName(paramsArray[0].replace("_", " "));
@@ -49,7 +48,7 @@ public class Person extends ParserClass {
   /** Устанавливает имя */
   public void setName(String name) {
     if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("\u001B[31mName cannot be null or empty\u001B[0m");
+      throw new IllegalArgumentException("Name cannot be null or empty");
     }
     this.name = name;
   }
@@ -57,7 +56,7 @@ public class Person extends ParserClass {
   /** Устанавливает рост */
   public void setHeight(Long height) {
     if (height == null || height <= 0) {
-      throw new IllegalArgumentException("\u001B[31mHeight must be greater than 0\u001B[0m");
+      throw new IllegalArgumentException("Height must be greater than 0");
     }
     this.height = height;
   }
@@ -65,7 +64,7 @@ public class Person extends ParserClass {
   /** Устанавливает вес */
   public void setWeight(float weight) {
     if (weight <= 0) {
-      throw new IllegalArgumentException("\u001B[31mWeight must be greater than 0\u001B[0m");
+      throw new IllegalArgumentException("Weight must be greater than 0");
     }
     this.weight = weight;
   }

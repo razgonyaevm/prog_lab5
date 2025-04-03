@@ -35,7 +35,7 @@ public class XMLHandler {
 
       marshaller.marshal(wrapper, osw);
     } catch (Exception e) {
-      System.out.println("\u001B[31mОшибка при сохранении XML: \u001B[0m" + e.getMessage());
+      System.out.println("Ошибка при сохранении XML: " + e.getMessage());
     }
   }
 
@@ -43,7 +43,7 @@ public class XMLHandler {
   public LinkedList<Movie> loadJar() {
     try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
       if (inputStream == null) {
-        System.out.println("\u001B[31mФайл не найден\u001B[0m");
+        System.out.println("Файл не найден");
         return new LinkedList<>();
       }
 
@@ -55,7 +55,7 @@ public class XMLHandler {
       }
 
     } catch (Exception e) {
-      System.out.println("\u001B[31mОшибка загрузки XML: \u001B[0m" + e.getMessage());
+      System.out.println("Ошибка загрузки XML: " + e.getMessage());
       return new LinkedList<>();
     }
   }
@@ -65,11 +65,11 @@ public class XMLHandler {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
       return getMovies(br);
     } catch (FileNotFoundException e) {
-      System.out.println("\u001B[31mФайл не найден\u001B[0m");
+      System.out.println("Файл не найден");
     } catch (IOException e) {
-      System.out.println("\u001B[31mОшибка при чтении файла: \u001B[0m" + e.getMessage());
+      System.out.println("Ошибка при чтении файла: " + e.getMessage());
     } catch (Exception e) {
-      System.out.println("\u001B[31mОшибка загрузки XML: \u001B[0m" + e.getMessage());
+      System.out.println("Ошибка загрузки XML: " + e.getMessage());
       return new LinkedList<>();
     }
     return new LinkedList<>();
@@ -91,17 +91,17 @@ public class XMLHandler {
   /** Валидация параметров фильма */
   private void validateMovie(Movie movie) {
     if (movie.getName() == null || movie.getName().trim().isEmpty()) {
-      throw new IllegalArgumentException("\u001B[31mMovie name cannot be null or empty\u001B[0m");
+      throw new IllegalArgumentException("Movie name cannot be null or empty");
     }
     if (movie.getCoordinates() == null) {
-      throw new IllegalArgumentException("\u001B[31mMovie coordinates cannot be null\u001B[0m");
+      throw new IllegalArgumentException("Movie coordinates cannot be null");
     }
     if (movie.getOscarsCount() <= 0) {
       throw new IllegalArgumentException(
-          "\u001B[31mOscars count must be a positive number\u001B[0m");
+          "Oscars count must be a positive number");
     }
     if (movie.getLength() == null || movie.getLength() <= 0) {
-      throw new IllegalArgumentException("\u001B[31mLength must be a positive number\u001B[0m");
+      throw new IllegalArgumentException("Length must be a positive number");
     }
   }
 }

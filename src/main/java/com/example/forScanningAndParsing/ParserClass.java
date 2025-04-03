@@ -7,7 +7,7 @@ public class ParserClass {
     try {
       return Integer.parseInt(value);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("\u001B[31mInvalid integer: \u001B[0m" + value, e);
+      throw new IllegalArgumentException("Invalid integer: " + value, e);
     }
   }
 
@@ -16,7 +16,7 @@ public class ParserClass {
     try {
       return Long.parseLong(value);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("\u001B[31mInvalid long: \u001B[0m" + value, e);
+      throw new IllegalArgumentException("Invalid long: " + value, e);
     }
   }
 
@@ -25,7 +25,7 @@ public class ParserClass {
     try {
       return Float.parseFloat(value);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("\u001B[31mInvalid float: \u001B[0m" + value, e);
+      throw new IllegalArgumentException("Invalid float: " + value, e);
     }
   }
 
@@ -34,7 +34,7 @@ public class ParserClass {
     try {
       return Double.parseDouble(value);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("\u001B[31mInvalid double: \u001B[0m" + value, e);
+      throw new IllegalArgumentException("Invalid double: " + value, e);
     }
   }
 
@@ -44,9 +44,9 @@ public class ParserClass {
       return Enum.valueOf(enumType, value);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException(
-          "\u001B[31mInvalid enum value: \u001B[0m"
+          "Invalid enum value: "
               + value
-              + "\u001B[31m for \u001B[0m"
+              + " for "
               + enumType.getSimpleName(),
           e);
     }

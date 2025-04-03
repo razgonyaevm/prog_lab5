@@ -44,11 +44,11 @@ public class MovieCollection {
   public void show() {
     int index = 1; // Нумерация начинается с 1
     for (Movie movie : movies) {
-      System.out.println("\u001B[3;32m" + "Фильм " + index + ": " + "\u001B[0m" + movie + "\n");
+      System.out.println("Фильм " + index + ": " + movie + "\n");
       index++;
     }
     if (movies.isEmpty()) {
-      System.out.println("\u001B[3;32mВ коллекции нет элементов\u001B[0m");
+      System.out.println("В коллекции нет элементов");
     }
   }
 
@@ -62,7 +62,7 @@ public class MovieCollection {
     if (index >= 0 && index < movies.size()) {
       movies.remove(index);
     } else {
-      System.out.println("\u001B[31mОшибка: неверный индекс\u001B[0m");
+      System.out.println("Ошибка: неверный индекс");
     }
   }
 
@@ -78,7 +78,7 @@ public class MovieCollection {
   /** Выводит сумму значений поля length для всех элементов коллекции */
   public void sumOfLength() {
     int sum = movies.stream().mapToInt(Movie::getLength).sum();
-    System.out.println("\u001B[3;32mСумма length:\u001B[0m " + sum);
+    System.out.println("Сумма length: " + sum);
   }
 
   /** Выводит количество элементов, у которых имя оператора равно заданному */
@@ -88,7 +88,7 @@ public class MovieCollection {
             .filter(m -> Objects.equals(m.getOperator().getName(), operatorName))
             .count();
     System.out.println(
-        "\u001B[3;32mКоличество фильмов оператора\u001B[0m " + operatorName + ": " + count);
+        "Количество фильмов оператора " + operatorName + ": " + count);
   }
 
   /** Выводит количество оскаров у всех фильмов в порядке убывания */
@@ -114,7 +114,6 @@ public class MovieCollection {
   public void save() {
     XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
     xmlHandler.save((LinkedList<Movie>) movies);
-    System.out.println("\u001B[1;34mКоллекция сохранена\u001B[0m");
   }
 
   /** Возвращает элемент коллекции по индексу */

@@ -38,11 +38,11 @@ public class ScanMovie {
   public void setName() {
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите название фильма: \u001B[0m");
+        System.out.print("Введите название фильма: ");
         movie.setName(scanner.nextLine());
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }
@@ -51,31 +51,31 @@ public class ScanMovie {
   public void setCoordinates() {
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите первую координату: \u001B[0m");
+        System.out.print("Введите первую координату: ");
         String x = scanner.nextLine();
         if (x.trim().isEmpty()) {
-          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
+          System.out.println("Значение не может быть null");
         } else {
           coordinates.setX(parseDouble(x));
           break;
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите вторую координату: \u001B[0m");
+        System.out.print("Введите вторую координату: ");
         String y = scanner.nextLine();
         if (y.trim().isEmpty()) {
-          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
+          System.out.println("Значение не может быть null");
         } else {
           coordinates.setY(parseLong(y));
           break;
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
@@ -86,16 +86,16 @@ public class ScanMovie {
   public void setOscarsCount() {
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите количество оскаров: \u001B[0m");
+        System.out.print("Введите количество оскаров: ");
         String count = scanner.nextLine();
         if (count.trim().isEmpty()) {
-          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
+          System.out.println("Значение не может быть null");
         } else {
           movie.setOscarsCount(parseInt(count));
           break;
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }
@@ -104,16 +104,16 @@ public class ScanMovie {
   public void setLength() {
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите длительность фильма: \u001B[0m");
+        System.out.print("Введите длительность фильма: ");
         String length = scanner.nextLine();
         if (length.trim().isEmpty()) {
-          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
+          System.out.println("Значение не может быть null");
         } else {
           movie.setLength(parseInt(length));
           break;
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }
@@ -123,9 +123,9 @@ public class ScanMovie {
     while (true) {
       try {
         System.out.print(
-            "\u001B[3;32mВведите жанр фильма (возможные значения: "
+            "Введите жанр фильма (возможные значения: "
                 + Arrays.toString(MovieGenre.values())
-                + "): \u001B[0m");
+                + "): ");
         String genre = scanner.nextLine().toUpperCase();
         if (genre.trim().isEmpty()) {
           movie.setGenre(null);
@@ -134,7 +134,7 @@ public class ScanMovie {
         }
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }
@@ -144,9 +144,9 @@ public class ScanMovie {
     while (true) {
       try {
         System.out.print(
-            "\u001B[3;32mВведите рейтинг фильма (возможные значения: "
+            "Введите рейтинг фильма (возможные значения: "
                 + Arrays.toString(MpaaRating.values())
-                + "): \u001B[0m");
+                + "): ");
         String mpaaRating = scanner.nextLine().toUpperCase();
         if (mpaaRating.trim().isEmpty()) {
           movie.setMpaaRating(null);
@@ -155,7 +155,7 @@ public class ScanMovie {
         }
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }

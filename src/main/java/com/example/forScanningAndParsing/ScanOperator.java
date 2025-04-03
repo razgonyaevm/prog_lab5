@@ -27,32 +27,32 @@ public class ScanOperator {
   public void setOperator() {
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите имя оператора: \u001B[0m");
+        System.out.print("Введите имя оператора: ");
         operator.setName(scanner.nextLine());
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите рост оператора: \u001B[0m");
+        System.out.print("Введите рост оператора: ");
         String height = scanner.nextLine();
         if (height.trim().isEmpty()) {
-          System.out.println("\u001B[31mЗначение не может быть null\u001B[0m");
+          System.out.println("Значение не может быть null");
         } else {
           operator.setHeight(parseLong(height));
           break;
         }
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
     while (true) {
       try {
-        System.out.print("\u001B[3;32mВведите вес оператора: \u001B[0m");
+        System.out.print("Введите вес оператора: ");
         String weight = scanner.nextLine();
         if (weight.trim().isEmpty()) {
           operator.setWeight(0);
@@ -61,16 +61,16 @@ public class ScanOperator {
         }
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
     while (true) {
       try {
         System.out.println(
-            "\u001B[3;32mВведите любимый цвет оператора: (возможные значения: "
+            "Введите любимый цвет оператора: (возможные значения: "
                 + Arrays.toString(Color.values())
-                + "): \u001B[0m");
+                + "): ");
         String color = scanner.nextLine().toUpperCase();
         if (color.trim().isEmpty()) {
           operator.setEyeColor(null);
@@ -79,16 +79,16 @@ public class ScanOperator {
         }
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
 
     while (true) {
       try {
         System.out.println(
-            "\u001B[3;32mВведите национальность оператора (возможные значения: "
+            "Введите национальность оператора (возможные значения: "
                 + Arrays.toString(Country.values())
-                + "): \u001B[0m");
+                + "): ");
         String nationality = scanner.nextLine().toUpperCase();
         if (nationality.trim().isEmpty()) {
           operator.setNationality(null);
@@ -97,7 +97,7 @@ public class ScanOperator {
         }
         break;
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + "\n");
+        System.out.println(e.getMessage());
       }
     }
   }

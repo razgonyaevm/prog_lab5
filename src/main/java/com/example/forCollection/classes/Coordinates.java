@@ -16,10 +16,10 @@ public class Coordinates {
 
   public Coordinates(double x, Long y) {
     if (x <= -817) {
-      throw new IllegalArgumentException("\u001B[31mX must be greater than -817\u001B[0m");
+      throw new IllegalArgumentException("X must be greater than -817");
     }
     if (y == null) {
-      throw new IllegalArgumentException("\u001B[31mY cannot be null\u001B[0m");
+      throw new IllegalArgumentException("Y cannot be null");
     }
     this.x = x;
     this.y = y;
@@ -28,7 +28,7 @@ public class Coordinates {
   /** Устанавливает координату X */
   public void setX(double x) {
     if (x <= -817) {
-      throw new IllegalArgumentException("\u001B[31mX must be greater than -817\u001B[0m");
+      throw new IllegalArgumentException("X must be greater than -817");
     }
     this.x = x;
   }
@@ -36,7 +36,7 @@ public class Coordinates {
   /** Устанавливает координату Y */
   public void setY(Long y) {
     if (y == null) {
-      throw new IllegalArgumentException("\u001B[31mY cannot be null\u001B[0m");
+      throw new IllegalArgumentException("Y cannot be null");
     }
     this.y = y;
   }
