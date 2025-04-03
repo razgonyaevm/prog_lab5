@@ -97,8 +97,7 @@ public class XMLHandler {
       throw new IllegalArgumentException("Movie coordinates cannot be null");
     }
     if (movie.getOscarsCount() <= 0) {
-      throw new IllegalArgumentException(
-          "Oscars count must be a positive number");
+      throw new IllegalArgumentException("Oscars count must be a positive number");
     }
     if (movie.getLength() == null || movie.getLength() <= 0) {
       throw new IllegalArgumentException("Length must be a positive number");

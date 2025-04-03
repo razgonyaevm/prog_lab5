@@ -34,8 +34,7 @@ public class Person extends ParserClass {
     String[] paramsArray = params.split(";");
     if (paramsArray.length != 5) {
       throw new IllegalArgumentException(
-          "Invalid number of parameters: expected 5, got "
-              + paramsArray.length);
+          "Invalid number of parameters: expected 5, got " + paramsArray.length);
     }
 
     setName(paramsArray[0].replace("_", " "));
