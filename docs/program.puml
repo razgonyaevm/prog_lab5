@@ -1,4 +1,135 @@
 @startuml
+scale 0.2
+skinparam dpi 300
+class com.example.forCollection.classes.Person {
+- String name
+- Long height
+- float weight
+- Color eyeColor
+- Country nationality
++ void setName(String)
++ void setHeight(Long)
++ void setWeight(float)
+}
+
+
+class com.example.mainProgram.forCommands.commands.ExitCommand {
++ void execute()
+}
+
+class com.example.forScanningAndParsing.ParserClass {
++ {static} int parseInt(String)
++ {static} long parseLong(String)
++ {static} float parseFloat(String)
++ {static} double parseDouble(String)
++ {static} E parseEnum(String,Class<E>)
+}
+
+class com.example.mainProgram.forCommands.commands.AddCommand {
+- MovieCollection collection
+- Scanner scanner
++ void execute()
+}
+
+
+class com.example.mainProgram.forCommands.commands.InfoCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.forCollection.MovieCollection {
+- List<Movie> movies
+- LocalDateTime initializationDate
++ void add(Movie)
++ void update(long,Movie)
++ void removeById(long)
++ void clear()
++ void show()
++ void reorder()
++ void removeAt(int)
++ void removeFirst()
++ void sumOfLength()
++ void countByOperator(String)
++ void printDescendingOscarsCount()
++ void setMovies(LinkedList<Movie>)
++ int size()
++ void save(String)
++ Movie get(int)
+}
+
+
+class com.example.mainProgram.forCommands.commands.SaveCommand {
+- MovieCollection collection
+- String filePath
++ void execute()
+}
+
+
+enum com.example.forCollection.enums.MpaaRating {
++  G
++  PG_13
++  NC_17
+}
+
+class com.example.forXML.MovieCollectionWrapper {
+- List<Movie> movies
++ LinkedList<Movie> getMovies()
+}
+
+
+class com.example.mainProgram.forCommands.commands.HelpCommand {
++ void execute()
+}
+
+enum com.example.forCollection.enums.Country {
++  FRANCE
++  SPAIN
++  NORTH_KOREA
+}
+
+class com.example.mainProgram.forCommands.commands.ReorderCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.mainProgram.forCommands.CommandInvoker {
+- Map<String,Command> commands
++ void register(String,Command)
++ void execute(String)
++ void execute(Command)
+}
+
+
+class com.example.mainProgram.forCommands.commands.ExecuteScriptCommand {
+- MovieCollection collection
+- String fileName
+- CommandInvoker invoker
++ void execute()
+}
+
+
+enum com.example.forCollection.enums.Color {
++  YELLOW
++  ORANGE
++  WHITE
+}
+
+class com.example.forCollection.classes.Coordinates {
+- double x
+- Long y
++ void setX(double)
++ void setY(Long)
+}
+
+
+class com.example.mainProgram.forCommands.commands.SumOfLengthCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
 class com.example.forCollection.classes.Movie {
 - {static} AtomicLong idGenerator
 - Long id
@@ -17,27 +148,46 @@ class com.example.forCollection.classes.Movie {
 + int compareTo(Movie)
 }
 
-class com.example.forCollection.classes.Person {
-- String name
-- Long height
-- float weight
-- Color eyeColor
-- Country nationality
-+ void setName(String)
-+ void setHeight(Long)
-+ void setWeight(float)
+
+class com.example.mainProgram.forCommands.commands.ShowCommand {
+- MovieCollection collection
++ void execute()
 }
 
-class com.example.forScanningAndParsing.ParserClass {
-+ {static} int parseInt(String)
-+ {static} long parseLong(String)
-+ {static} float parseFloat(String)
-+ {static} double parseDouble(String)
-+ {static} E parseEnum(String,Class<E>)
+
+class com.example.mainProgram.forCommands.commands.RemoveFirstProgram {
+- MovieCollection collection
++ void execute()
 }
+
+
+class com.example.mainProgram.forCommands.commands.PrintDescendingOscarsCountCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.mainProgram.forCommands.commands.UpdateCommand {
+- MovieCollection collection
+- Scanner scanner
+- String command
++ void execute()
+}
+
 
 class com.example.mainProgram.Program {
 + {static} void main(String[])
++ {static} void notSimpleMethods(String,MovieCollection,Scanner,CommandInvoker)
+}
+
+class com.example.mainProgram.forCommands.commands.ClearCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+interface com.example.mainProgram.forCommands.Command {
+~ void execute()
 }
 
 class com.example.forScanningAndParsing.ScanOperator {
@@ -45,6 +195,7 @@ class com.example.forScanningAndParsing.ScanOperator {
 - Person operator
 + void setOperator()
 }
+
 
 class com.example.forScanningAndParsing.ScanMovie {
 - Movie movie
@@ -58,63 +209,37 @@ class com.example.forScanningAndParsing.ScanMovie {
 + void setMpaaRating()
 }
 
-class com.example.forCollection.MovieCollection {
-- LinkedList<Movie> movies
-- LocalDateTime initializationDate
-+ void add(Movie)
-+ void update(long,Movie)
-+ void removeById(long)
-+ void clear()
-+ void show()
-+ void reorder()
-+ void removeAt(int)
-+ void removeFirst()
-+ void sumOfLength()
-+ void countByOperator(String)
-+ void printDescendingOscarsCount()
-+ void setMovies(LinkedList<Movie>)
-+ int size()
-+ void save()
+
+class com.example.mainProgram.forCommands.commands.CountByOperator {
+- MovieCollection collection
+- String command
++ void execute()
 }
 
-enum com.example.forCollection.enums.MpaaRating {
-+  G
-+  PG_13
-+  NC_17
+
+class com.example.mainProgram.forCommands.commands.RemoveAtCommand {
+- MovieCollection collection
+- String command
++ void execute()
 }
 
-class com.example.forXML.MovieCollectionWrapper {
-- LinkedList<Movie> movies
-+ LinkedList<Movie> getMovies()
+
+class com.example.mainProgram.forCommands.commands.RemoveByIdCommand {
+- MovieCollection collection
+- String command
++ void execute()
 }
 
-enum com.example.forCollection.enums.Country {
-+  FRANCE
-+  SPAIN
-+  NORTH_KOREA
-}
-
-enum com.example.forCollection.enums.Color {
-+  YELLOW
-+  ORANGE
-+  WHITE
-}
 
 class com.example.forXML.XMLHandler {
 - String filePath
 + void save(LinkedList<Movie>)
-+ LinkedList<Movie> load_jar()
-+ LinkedList<Movie> load_local()
++ LinkedList<Movie> loadJar()
++ LinkedList<Movie> loadLocal()
 - LinkedList<Movie> getMovies(BufferedReader)
 - void validateMovie(Movie)
 }
 
-class com.example.forCollection.classes.Coordinates {
-- double x
-- Long y
-+ void setX(double)
-+ void setY(Long)
-}
 
 enum com.example.forCollection.enums.MovieGenre {
 +  COMEDY
@@ -123,18 +248,25 @@ enum com.example.forCollection.enums.MovieGenre {
 +  HORROR
 }
 
-com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Movie
+
+
 com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Person
-
-' Добавление класса Program
-class com.example.mainProgram.Program {
-+ {static} void main(String[])
-}
-
-' Добавление связи с MovieCollection
-com.example.mainProgram.Program ..> com.example.forCollection.MovieCollection : "Загружает и управляет коллекцией фильмов"
-com.example.mainProgram.Program ..> com.example.forXML.XMLHandler : "Использует XMLHandler для загрузки и сохранения данных xml"
-com.example.mainProgram.Program ..> com.example.forScanningAndParsing.ParserClass : "Использует парсер для обработки входных данных"
-com.example.mainProgram.Program ..> com.example.forScanningAndParsing.ScanMovie : "Использует ScanMovie для получения данных о фильмах"
-
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ExitCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.AddCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.InfoCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.SaveCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.HelpCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ReorderCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ExecuteScriptCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.SumOfLengthCommand
+com.example.forCollection.classes.Comparable <|.. com.example.forCollection.classes.Movie
+com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Movie
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ShowCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveFirstProgram
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.PrintDescendingOscarsCountCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.UpdateCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ClearCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.CountByOperator
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveAtCommand
+com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveByIdCommand
 @enduml
