@@ -5,14 +5,15 @@ import com.example.mainProgram.forCommands.Command;
 
 public class SaveCommand implements Command {
   private final MovieCollection collection;
+  private final String filePath;
 
-  public SaveCommand(MovieCollection collection) {
+  public SaveCommand(MovieCollection collection, String filePath) {
     this.collection = collection;
+    this.filePath = filePath;
   }
 
   @Override
   public void execute() {
-    collection.save();
-    System.out.println("Коллекция сохранена");
+    collection.save(filePath);
   }
 }

@@ -110,8 +110,8 @@ public class MovieCollection {
   }
 
   /** Сохраняет коллекцию в файл save_movies.xml */
-  public void save() {
-    XMLHandler xmlHandler = new XMLHandler("save_movies.xml");
+  public void save(String filePath) {
+    XMLHandler xmlHandler = new XMLHandler(filePath);
     xmlHandler.save((LinkedList<Movie>) movies);
   }
 

@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * href="https://javarush.com/quests/lectures/questcollections.level03.lecture07">JavaRush</a>
  */
 public class XMLHandler {
-  private final String filePath;
+  private String filePath;
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
@@ -20,7 +20,11 @@ public class XMLHandler {
   /** Сохранение коллекции в файл (пользователь сам прописывает путь до файла) */
   public void save(LinkedList<Movie> movies) {
 
+    if (filePath.charAt(0) == '~')
+      filePath = System.getProperty("user.home") + filePath.substring(1);
+
     File file = new File(filePath);
+    file.getParentFile().mkdirs();
 
     try (OutputStream outputStream = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(outputStream);

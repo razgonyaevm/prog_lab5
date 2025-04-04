@@ -48,7 +48,6 @@ public class Program {
     invoker.register("add", new AddCommand(collection, scanner));
     invoker.register("show", new ShowCommand(collection));
     invoker.register("clear", new ClearCommand(collection));
-    invoker.register("save", new SaveCommand(collection));
     invoker.register("exit", new ExitCommand());
     invoker.register("remove_first", new RemoveFirstProgram(collection));
     invoker.register("reorder", new ReorderCommand(collection));
@@ -70,6 +69,13 @@ public class Program {
       case "execute_script" -> {
         if (parts.length == 2) {
           invoker.execute(new ExecuteScriptCommand(collection, parts[1], invoker));
+        } else {
+          System.out.println("Ошибка: укажите имя файла");
+        }
+      }
+      case "save" -> {
+        if (parts.length == 2) {
+          invoker.execute(new SaveCommand(collection, parts[1]));
         } else {
           System.out.println("Ошибка: укажите имя файла");
         }
