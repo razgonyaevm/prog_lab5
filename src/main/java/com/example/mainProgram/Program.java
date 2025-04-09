@@ -22,18 +22,22 @@ public class Program {
 
     if (Objects.equals(args[0], "jar")) index = 1;
 
-    if (!args[index].contains(".xml")) {
-      System.out.println("Ошибка: укажите файл с расширением .xml");
-      return;
-    }
-
     if (index == 1) {
       System.out.println("Загрузка из jar-файла");
-      String filePath = args[1];
-      XMLHandler xmlHandler = new XMLHandler("xml/" + filePath);
+      XMLHandler xmlHandler;
+      if (args.length == 1) {
+        xmlHandler = new XMLHandler("xml/movies.xml");
+      } else {
+        xmlHandler = new XMLHandler("xml/" + args[1]);
+      }
 
       collection.setMovies(xmlHandler.loadJar());
     } else {
+      if (!args[index].trim().endsWith(".xml")) {
+        System.out.println("Ошибка: укажите файл с расширением .xml");
+        return;
+      }
+
       String filePath = args[0];
       XMLHandler xmlHandler = new XMLHandler(filePath);
       collection.setMovies(xmlHandler.loadLocal());
