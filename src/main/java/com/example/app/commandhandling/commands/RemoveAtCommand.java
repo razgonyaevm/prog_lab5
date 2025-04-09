@@ -17,13 +17,13 @@ public class RemoveAtCommand implements Command {
 
   @Override
   public void execute() {
-    String[] parts = command.split(" ");
+    String[] parts = command.trim().split("\\s+");
     if (parts.length != 2) {
       System.out.println("Ошибка: укажите id");
       return;
     }
     try {
-      collection.removeAt(parseInt(command.split(" ")[1]));
+      collection.removeAt(parseInt(command.trim().split("\\s+")[1]));
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }

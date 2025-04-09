@@ -22,7 +22,7 @@ public class UpdateCommand implements Command {
 
   @Override
   public void execute() {
-    String[] parts = command.split(" ");
+    String[] parts = command.trim().split("\\s+");
     if (parts.length != 2) {
       System.out.println("Ошибка: укажите id");
       return;
