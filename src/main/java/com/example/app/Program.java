@@ -1,9 +1,9 @@
 package com.example.app;
 
-import com.example.service.MovieCollection;
-import com.example.xml.XMLHandler;
 import com.example.app.commandhandling.CommandInvoker;
 import com.example.app.commandhandling.commands.*;
+import com.example.service.MovieCollection;
+import com.example.xml.XMLHandler;
 import java.util.*;
 
 /**

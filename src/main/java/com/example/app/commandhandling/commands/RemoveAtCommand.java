@@ -2,8 +2,8 @@ package com.example.app.commandhandling.commands;
 
 import static com.example.parsing.ParserClass.parseInt;
 
-import com.example.service.MovieCollection;
 import com.example.app.commandhandling.Command;
+import com.example.service.MovieCollection;
 
 /** Удаление элемента из коллекции по индексу */
 public class RemoveAtCommand implements Command {

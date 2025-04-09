@@ -1,8 +1,8 @@
 package com.example.service.model;
 
+import com.example.parsing.ParserClass;
 import com.example.service.enums.MovieGenre;
 import com.example.service.enums.MpaaRating;
-import com.example.parsing.ParserClass;
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.EqualsAndHashCode;

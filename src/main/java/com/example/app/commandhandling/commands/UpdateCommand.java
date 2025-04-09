@@ -2,10 +2,10 @@ package com.example.app.commandhandling.commands;
 
 import static com.example.parsing.ParserClass.parseLong;
 
+import com.example.app.commandhandling.Command;
+import com.example.parsing.ScanMovie;
 import com.example.service.MovieCollection;
 import com.example.service.model.Movie;
-import com.example.parsing.ScanMovie;
-import com.example.app.commandhandling.Command;
 import java.util.Scanner;
 
 /** Обновление элемента в коллекции по его id */

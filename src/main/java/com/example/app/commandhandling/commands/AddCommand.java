@@ -1,8 +1,8 @@
 package com.example.app.commandhandling.commands;
 
-import com.example.service.MovieCollection;
-import com.example.parsing.ScanMovie;
 import com.example.app.commandhandling.Command;
+import com.example.parsing.ScanMovie;
+import com.example.service.MovieCollection;
 import java.util.Scanner;
 
 /** Добавление элемента в коллекцию */

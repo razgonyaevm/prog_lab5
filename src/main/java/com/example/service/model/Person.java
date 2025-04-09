@@ -1,8 +1,8 @@
 package com.example.service.model;
 
+import com.example.parsing.ParserClass;
 import com.example.service.enums.Color;
 import com.example.service.enums.Country;
-import com.example.parsing.ParserClass;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

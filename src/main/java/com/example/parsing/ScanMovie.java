@@ -2,18 +2,15 @@ package com.example.parsing;
 
 import static com.example.parsing.ParserClass.*;
 
-import com.example.service.model.Coordinates;
-import com.example.service.model.Movie;
 import com.example.service.enums.MovieGenre;
 import com.example.service.enums.MpaaRating;
+import com.example.service.model.Coordinates;
+import com.example.service.model.Movie;
 import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
-/**
- * Класс для сканирования и создания экземпляров класса {@link
- * com.example.service.model.Movie}
- */
+/** Класс для сканирования и создания экземпляров класса {@link com.example.service.model.Movie} */
 public class ScanMovie {
   @Getter private final Movie movie;
   private final Coordinates coordinates;

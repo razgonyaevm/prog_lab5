@@ -1,7 +1,7 @@
 package com.example.app.commandhandling.commands;
 
-import com.example.service.MovieCollection;
 import com.example.app.commandhandling.Command;
+import com.example.service.MovieCollection;
 
 /** Очищает коллекцию */
 public class ClearCommand implements Command {

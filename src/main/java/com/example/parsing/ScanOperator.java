@@ -2,16 +2,15 @@ package com.example.parsing;
 
 import static com.example.parsing.ParserClass.*;
 
-import com.example.service.model.Person;
 import com.example.service.enums.Color;
 import com.example.service.enums.Country;
+import com.example.service.model.Person;
 import java.util.Arrays;
 import java.util.Scanner;
 import lombok.Getter;
 
 /**
- * Класс для сканирования оператора в виде объекта класса {@link
- * com.example.service.model.Person}
+ * Класс для сканирования оператора в виде объекта класса {@link com.example.service.model.Person}
  */
 public class ScanOperator {
   private final Scanner scanner;

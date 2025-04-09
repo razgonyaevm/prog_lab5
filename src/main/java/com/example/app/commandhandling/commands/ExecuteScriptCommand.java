@@ -2,9 +2,9 @@ package com.example.app.commandhandling.commands;
 
 import static com.example.app.Program.notSimpleMethods;
 
-import com.example.service.MovieCollection;
 import com.example.app.commandhandling.Command;
 import com.example.app.commandhandling.CommandInvoker;
+import com.example.service.MovieCollection;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
