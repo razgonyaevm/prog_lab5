@@ -1,5 +1,7 @@
 package com.example.app;
 
+import static com.example.app.commandhandling.CommandHandler.handleCommand;
+
 import com.example.app.commandhandling.CommandInvoker;
 import com.example.app.commandhandling.commands.*;
 import com.example.service.MovieCollection;
@@ -61,33 +63,7 @@ public class Program {
 
     while (scanner.hasNextLine()) {
       String command = scanner.nextLine().trim();
-      notSimpleMethods(command, collection, scanner, invoker);
-    }
-  }
-
-  public static void notSimpleMethods(
-      String command, MovieCollection collection, Scanner scanner, CommandInvoker invoker) {
-    String[] parts = command.trim().split("\\s+");
-    switch (parts[0]) {
-      case "update" -> invoker.execute(new UpdateCommand(collection, scanner, command));
-      case "execute_script" -> {
-        if (parts.length == 2) {
-          invoker.execute(new ExecuteScriptCommand(collection, parts[1], invoker));
-        } else {
-          System.out.println("Ошибка: укажите имя файла");
-        }
-      }
-      case "save" -> {
-        if (parts.length == 2) {
-          invoker.execute(new SaveCommand(collection, parts[1]));
-        } else {
-          System.out.println("Ошибка: укажите имя файла");
-        }
-      }
-      case "count_by_operator" -> invoker.execute(new CountByOperator(collection, command));
-      case "remove_by_id" -> invoker.execute(new RemoveByIdCommand(collection, command));
-      case "remove_at" -> invoker.execute(new RemoveAtCommand(collection, command));
-      default -> invoker.execute(command);
+      handleCommand(command, collection, scanner, invoker);
     }
   }
 }

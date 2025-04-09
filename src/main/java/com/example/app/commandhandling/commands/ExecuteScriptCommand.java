@@ -1,6 +1,6 @@
 package com.example.app.commandhandling.commands;
 
-import static com.example.app.Program.notSimpleMethods;
+import static com.example.app.commandhandling.CommandHandler.handleCommand;
 
 import com.example.app.commandhandling.Command;
 import com.example.app.commandhandling.CommandInvoker;
@@ -28,7 +28,7 @@ public class ExecuteScriptCommand implements Command {
       Scanner fileScanner = new Scanner(br);
       while (fileScanner.hasNextLine()) {
         String command = fileScanner.nextLine().trim();
-        notSimpleMethods(command, collection, fileScanner, invoker);
+        handleCommand(command, collection, fileScanner, invoker);
       }
     } catch (FileNotFoundException e) {
       System.out.println("Файл не найден");
