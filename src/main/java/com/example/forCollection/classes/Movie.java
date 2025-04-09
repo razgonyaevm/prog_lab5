@@ -1,7 +1,5 @@
 package com.example.forCollection.classes;
 
-import com.example.forCollection.enums.Color;
-import com.example.forCollection.enums.Country;
 import com.example.forCollection.enums.MovieGenre;
 import com.example.forCollection.enums.MpaaRating;
 import com.example.forScanningAndParsing.ParserClass;
@@ -52,30 +50,6 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     setGenre(genre);
     setMpaaRating(mpaaRating);
     setOperator(operator);
-  }
-
-  /** Конструктор для парсинга данных в одну строку */
-  public Movie(String parameters) {
-    String[] parts = parameters.split(";");
-    if (parts.length < 12) {
-      throw new IllegalArgumentException(
-          "Invalid parameter string: expected 12, got " + parts.length);
-    }
-    this.id = idGenerator.getAndIncrement();
-    this.creationDate = LocalDate.now();
-    setName(parts[0].replace("_", " "));
-    setCoordinates(new Coordinates(parseDouble(parts[1]), parseLong(parts[2])));
-    setOscarsCount(parseInt(parts[3]));
-    setLength(parseInt(parts[4]));
-    this.genre = parseEnum(parts[5], MovieGenre.class);
-    this.mpaaRating = parseEnum(parts[6], MpaaRating.class);
-    setOperator(
-        new Person(
-            parts[7].replace("_", " "),
-            parseLong(parts[8]),
-            parseFloat(parts[9]),
-            parseEnum(parts[10], Color.class),
-            parseEnum(parts[11], Country.class)));
   }
 
   /** Устанавливает названия фильма */

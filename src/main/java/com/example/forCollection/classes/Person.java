@@ -29,21 +29,6 @@ public class Person extends ParserClass {
     this.nationality = nationality;
   }
 
-  /** Конструктор для парсинга данных в одну строку */
-  public Person(String params) {
-    String[] paramsArray = params.split(";");
-    if (paramsArray.length != 5) {
-      throw new IllegalArgumentException(
-          "Invalid number of parameters: expected 5, got " + paramsArray.length);
-    }
-
-    setName(paramsArray[0].replace("_", " "));
-    setHeight(parseLong(paramsArray[1]));
-    setWeight(parseFloat(paramsArray[2]));
-    this.eyeColor = parseEnum(paramsArray[3], Color.class);
-    this.nationality = parseEnum(paramsArray[4], Country.class);
-  }
-
   /** Устанавливает имя */
   public void setName(String name) {
     if (name == null || name.trim().isEmpty()) {
