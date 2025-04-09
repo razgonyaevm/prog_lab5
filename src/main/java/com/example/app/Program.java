@@ -67,7 +67,7 @@ public class Program {
 
   public static void notSimpleMethods(
       String command, MovieCollection collection, Scanner scanner, CommandInvoker invoker) {
-    String[] parts = command.split(" ");
+    String[] parts = command.trim().split("\\s+");
     switch (parts[0]) {
       case "update" -> invoker.execute(new UpdateCommand(collection, scanner, command));
       case "execute_script" -> {
