@@ -4,5 +4,9 @@ public enum MovieGenre {
   COMEDY,
   MUSICAL,
   THRILLER,
-  HORROR;
+  HORROR,
+  ROMANTIC,
+  CRIMINAL,
+  SCIENTIFIC,
+  WAR
 }

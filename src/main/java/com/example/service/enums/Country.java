@@ -3,5 +3,8 @@ package com.example.service.enums;
 public enum Country {
   FRANCE,
   SPAIN,
-  NORTH_KOREA;
+  USA,
+  CANADA,
+  GERMANY,
+  NORTH_KOREA
 }
