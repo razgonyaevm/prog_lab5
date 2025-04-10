@@ -19,7 +19,7 @@ public class MovieCollection {
 
   /** Устанавливает новый элемент на место с индексом id */
   public void update(long id, Movie newMovie) {
-    newMovie.setId(id);
+    newMovie.updateId(id);
 
     ListIterator<Movie> iterator = movies.listIterator();
     while (iterator.hasNext()) {

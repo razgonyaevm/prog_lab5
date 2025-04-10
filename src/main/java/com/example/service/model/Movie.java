@@ -3,8 +3,8 @@ package com.example.service.model;
 import com.example.parsing.ParserClass;
 import com.example.service.enums.MovieGenre;
 import com.example.service.enums.MpaaRating;
+import com.example.validate.*;
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicLong;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +15,8 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = false)
 @ToString
 public class Movie extends ParserClass implements Comparable<Movie> {
-  private static final AtomicLong idGenerator = new AtomicLong(1);
 
-  @Setter private Long id;
+  private Long id;
   private String name;
   private Coordinates coordinates;
   private final LocalDate creationDate;
@@ -27,8 +26,13 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   @Setter private MpaaRating mpaaRating;
   @Setter private Person operator;
 
+  private static final Validator<String> nameValidator = new NameValidator();
+  private static final Validator<Coordinates> coordinatesValidator = new CoordinateValidator();
+  private static final Validator<Integer> oscarsCountValidator = new OscarsCountValidator();
+  private static final Validator<Integer> lengthValidator = new LengthValidator();
+
   public Movie() {
-    this.id = idGenerator.getAndIncrement();
+    generateId();
     this.creationDate = LocalDate.now();
   }
 
@@ -52,35 +56,37 @@ public class Movie extends ParserClass implements Comparable<Movie> {
     setOperator(operator);
   }
 
+  /** Устанавливает id */
+  private void generateId() {
+    this.id = IdGenerator.getNextId();
+  }
+
+  /** Установка собственного значения id для метода update */
+  public void updateId(long id) {
+    this.id = id;
+  }
+
   /** Устанавливает названия фильма */
   public void setName(String name) {
-    if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("Name cannot be null or empty");
-    }
+    nameValidator.validate(name);
     this.name = name;
   }
 
   /** Устанавливает координаты фильма (что это вообще значит) */
   public void setCoordinates(Coordinates coordinates) {
-    if (coordinates == null) {
-      throw new IllegalArgumentException("Coordinates cannot be null");
-    }
+    coordinatesValidator.validate(coordinates);
     this.coordinates = coordinates;
   }
 
   /** Устанавливает количество оскаров у фильма */
   public void setOscarsCount(int oscarsCount) {
-    if (oscarsCount <= 0) {
-      throw new IllegalArgumentException("Oscars count must be greater than 0");
-    }
+    oscarsCountValidator.validate(oscarsCount);
     this.oscarsCount = oscarsCount;
   }
 
   /** Устанавливает продолжительность фильма */
   public void setLength(Integer length) {
-    if (length == null || length <= 0) {
-      throw new IllegalArgumentException("Length must be greater than 0");
-    }
+    lengthValidator.validate(length);
     this.length = length;
   }
 
