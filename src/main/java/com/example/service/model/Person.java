@@ -3,6 +3,10 @@ package com.example.service.model;
 import com.example.parsing.ParserClass;
 import com.example.service.enums.Color;
 import com.example.service.enums.Country;
+import com.example.validate.HeightValidator;
+import com.example.validate.NameValidator;
+import com.example.validate.Validator;
+import com.example.validate.WeightValidator;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +25,10 @@ public class Person extends ParserClass {
   @Setter private Color eyeColor;
   @Setter private Country nationality;
 
+  private static final Validator<String> nameValidator = new NameValidator();
+  private static final Validator<Long> heightValidator = new HeightValidator();
+  private static final Validator<Float> weightValidator = new WeightValidator();
+
   public Person(String name, Long height, float weight, Color eyeColor, Country nationality) {
     setName(name);
     setHeight(height);
@@ -31,25 +39,19 @@ public class Person extends ParserClass {
 
   /** Устанавливает имя */
   public void setName(String name) {
-    if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("Name cannot be null or empty");
-    }
+    nameValidator.validate(name);
     this.name = name;
   }
 
   /** Устанавливает рост */
   public void setHeight(Long height) {
-    if (height == null || height <= 0) {
-      throw new IllegalArgumentException("Height must be greater than 0");
-    }
+    heightValidator.validate(height);
     this.height = height;
   }
 
   /** Устанавливает вес */
   public void setWeight(float weight) {
-    if (weight <= 0) {
-      throw new IllegalArgumentException("Weight must be greater than 0");
-    }
+    weightValidator.validate(weight);
     this.weight = weight;
   }
 }

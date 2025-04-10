@@ -1,6 +1,8 @@
 package com.example.xml;
 
 import com.example.service.model.Movie;
+import com.example.validate.MovieValidator;
+import com.example.validate.Validator;
 import jakarta.xml.bind.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -12,6 +14,8 @@ import java.util.LinkedList;
  */
 public class XMLHandler {
   private String filePath;
+
+  private static final Validator<Movie> movieValidator = new MovieValidator();
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
@@ -87,24 +91,8 @@ public class XMLHandler {
 
     LinkedList<Movie> movies = wrapper.getMovies();
     for (Movie movie : movies) {
-      validateMovie(movie);
+      movieValidator.validate(movie);
     }
     return movies;
-  }
-
-  /** Валидация параметров фильма */
-  private void validateMovie(Movie movie) {
-    if (movie.getName() == null || movie.getName().trim().isEmpty()) {
-      throw new IllegalArgumentException("Movie name cannot be null or empty");
-    }
-    if (movie.getCoordinates() == null) {
-      throw new IllegalArgumentException("Movie coordinates cannot be null");
-    }
-    if (movie.getOscarsCount() <= 0) {
-      throw new IllegalArgumentException("Oscars count must be a positive number");
-    }
-    if (movie.getLength() == null || movie.getLength() <= 0) {
-      throw new IllegalArgumentException("Length must be a positive number");
-    }
   }
 }
