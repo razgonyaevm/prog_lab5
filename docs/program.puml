@@ -1,23 +1,9 @@
 @startuml
-scale 0.2
+
+scale 0.15
 skinparam dpi 300
-class com.example.forCollection.classes.Person {
-- String name
-- Long height
-- float weight
-- Color eyeColor
-- Country nationality
-+ void setName(String)
-+ void setHeight(Long)
-+ void setWeight(float)
-}
 
-
-class com.example.mainProgram.forCommands.commands.ExitCommand {
-+ void execute()
-}
-
-class com.example.forScanningAndParsing.ParserClass {
+class com.example.parsing.ParserClass {
 + {static} int parseInt(String)
 + {static} long parseLong(String)
 + {static} float parseFloat(String)
@@ -25,20 +11,59 @@ class com.example.forScanningAndParsing.ParserClass {
 + {static} E parseEnum(String,Class<E>)
 }
 
-class com.example.mainProgram.forCommands.commands.AddCommand {
+interface com.example.app.commandhandling.Command {
+~ void execute()
+}
+
+class com.example.app.commandhandling.commands.ExecuteScriptCommand {
+- MovieCollection collection
+- String fileName
+- CommandInvoker invoker
++ void execute()
+}
+
+
+class com.example.app.commandhandling.commands.AddCommand {
 - MovieCollection collection
 - Scanner scanner
 + void execute()
 }
 
 
-class com.example.mainProgram.forCommands.commands.InfoCommand {
+class com.example.validate.WeightValidator {
++ void validate(Float)
+}
+
+class com.example.validate.LengthValidator {
++ void validate(Integer)
+}
+
+enum com.example.service.enums.Country {
++  FRANCE
++  SPAIN
++  USA
++  CANADA
++  GERMANY
++  NORTH_KOREA
+}
+
+class com.example.app.commandhandling.commands.ReorderCommand {
 - MovieCollection collection
 + void execute()
 }
 
 
-class com.example.forCollection.MovieCollection {
+class com.example.validate.OscarsCountValidator {
++ void validate(Integer)
+}
+
+class com.example.app.commandhandling.commands.RemoveFirstProgram {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.service.MovieCollection {
 - List<Movie> movies
 - LocalDateTime initializationDate
 + void add(Movie)
@@ -59,42 +84,7 @@ class com.example.forCollection.MovieCollection {
 }
 
 
-class com.example.mainProgram.forCommands.commands.SaveCommand {
-- MovieCollection collection
-- String filePath
-+ void execute()
-}
-
-
-enum com.example.forCollection.enums.MpaaRating {
-+  G
-+  PG_13
-+  NC_17
-}
-
-class com.example.forXML.MovieCollectionWrapper {
-- List<Movie> movies
-+ LinkedList<Movie> getMovies()
-}
-
-
-class com.example.mainProgram.forCommands.commands.HelpCommand {
-+ void execute()
-}
-
-enum com.example.forCollection.enums.Country {
-+  FRANCE
-+  SPAIN
-+  NORTH_KOREA
-}
-
-class com.example.mainProgram.forCommands.commands.ReorderCommand {
-- MovieCollection collection
-+ void execute()
-}
-
-
-class com.example.mainProgram.forCommands.CommandInvoker {
+class com.example.app.commandhandling.CommandInvoker {
 - Map<String,Command> commands
 + void register(String,Command)
 + void execute(String)
@@ -102,36 +92,74 @@ class com.example.mainProgram.forCommands.CommandInvoker {
 }
 
 
-class com.example.mainProgram.forCommands.commands.ExecuteScriptCommand {
+class com.example.app.Program {
++ {static} void main(String[])
+}
+
+enum com.example.service.enums.MovieGenre {
++  COMEDY
++  MUSICAL
++  THRILLER
++  HORROR
++  ROMANTIC
++  CRIMINAL
++  SCIENTIFIC
++  WAR
+}
+
+class com.example.validate.MovieValidator {
+- Validator<String> nameValidator
+- Validator<Coordinates> cordinatesValidator
+- Validator<Integer> oscarsCountValidator
+- Validator<Integer> lengthValidator
++ void validate(Movie)
+}
+
+
+class com.example.validate.XValidator {
++ void validate(Double)
+}
+
+class com.example.app.commandhandling.commands.InfoCommand {
 - MovieCollection collection
-- String fileName
-- CommandInvoker invoker
 + void execute()
 }
 
 
-enum com.example.forCollection.enums.Color {
-+  YELLOW
-+  ORANGE
-+  WHITE
+class com.example.app.commandhandling.commands.HelpCommand {
++ void execute()
 }
 
-class com.example.forCollection.classes.Coordinates {
-- double x
-- Long y
-+ void setX(double)
-+ void setY(Long)
+class com.example.app.commandhandling.CommandHandler {
++ {static} void handleCommand(String,MovieCollection,Scanner,CommandInvoker)
 }
 
-
-class com.example.mainProgram.forCommands.commands.SumOfLengthCommand {
+class com.example.app.commandhandling.commands.ShowCommand {
 - MovieCollection collection
 + void execute()
 }
 
 
-class com.example.forCollection.classes.Movie {
-- {static} AtomicLong idGenerator
+interface com.example.validate.Validator {
+~ void validate(T)
+}
+
+class com.example.app.commandhandling.commands.UpdateCommand {
+- MovieCollection collection
+- Scanner scanner
+- String command
++ void execute()
+}
+
+
+class com.example.app.commandhandling.commands.CountByOperator {
+- MovieCollection collection
+- String command
++ void execute()
+}
+
+
+class com.example.service.model.Movie {
 - Long id
 - String name
 - Coordinates coordinates
@@ -141,6 +169,12 @@ class com.example.forCollection.classes.Movie {
 - MovieGenre genre
 - MpaaRating mpaaRating
 - Person operator
+- {static} Validator<String> nameValidator
+- {static} Validator<Coordinates> coordinatesValidator
+- {static} Validator<Integer> oscarsCountValidator
+- {static} Validator<Integer> lengthValidator
+- void generateId()
++ void updateId(long)
 + void setName(String)
 + void setCoordinates(Coordinates)
 + void setOscarsCount(int)
@@ -149,55 +183,111 @@ class com.example.forCollection.classes.Movie {
 }
 
 
-class com.example.mainProgram.forCommands.commands.ShowCommand {
-- MovieCollection collection
-+ void execute()
+class com.example.validate.CoordinateValidator {
+- Validator<Double> xValidate
+- Validator<Long> yValidate
++ void validate(Coordinates)
 }
 
 
-class com.example.mainProgram.forCommands.commands.RemoveFirstProgram {
-- MovieCollection collection
-+ void execute()
+class com.example.xml.MovieCollectionWrapper {
+- List<Movie> movies
++ LinkedList<Movie> getMovies()
 }
 
 
-class com.example.mainProgram.forCommands.commands.PrintDescendingOscarsCountCommand {
-- MovieCollection collection
-+ void execute()
-}
-
-
-class com.example.mainProgram.forCommands.commands.UpdateCommand {
-- MovieCollection collection
-- Scanner scanner
-- String command
-+ void execute()
-}
-
-
-class com.example.mainProgram.Program {
-+ {static} void main(String[])
-+ {static} void notSimpleMethods(String,MovieCollection,Scanner,CommandInvoker)
-}
-
-class com.example.mainProgram.forCommands.commands.ClearCommand {
-- MovieCollection collection
-+ void execute()
-}
-
-
-interface com.example.mainProgram.forCommands.Command {
-~ void execute()
-}
-
-class com.example.forScanningAndParsing.ScanOperator {
+class com.example.parsing.ScanOperator {
 - Scanner scanner
 - Person operator
 + void setOperator()
 }
 
 
-class com.example.forScanningAndParsing.ScanMovie {
+class com.example.service.model.IdGenerator {
+- {static} long nextId
++ {static} long getNextId()
+}
+
+
+class com.example.validate.HeightValidator {
++ void validate(Long)
+}
+
+class com.example.validate.NameValidator {
++ void validate(String)
+}
+
+class com.example.app.commandhandling.commands.ClearCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.app.commandhandling.commands.RemoveAtCommand {
+- MovieCollection collection
+- String command
++ void execute()
+}
+
+
+class com.example.service.model.Person {
+- String name
+- Long height
+- float weight
+- Color eyeColor
+- Country nationality
+- {static} Validator<String> nameValidator
+- {static} Validator<Long> heightValidator
+- {static} Validator<Float> weightValidator
++ void setName(String)
++ void setHeight(Long)
++ void setWeight(float)
+}
+
+
+enum com.example.service.enums.Color {
++  YELLOW
++  ORANGE
++  WHITE
++  BLACK
++  PURPLE
+}
+
+class com.example.app.commandhandling.commands.SaveCommand {
+- MovieCollection collection
+- String filePath
++ void execute()
+}
+
+
+class com.example.app.commandhandling.commands.ExitCommand {
++ void execute()
+}
+
+class com.example.app.commandhandling.commands.RemoveByIdCommand {
+- MovieCollection collection
+- String command
++ void execute()
+}
+
+
+class com.example.app.commandhandling.commands.PrintDescendingOscarsCountCommand {
+- MovieCollection collection
++ void execute()
+}
+
+
+class com.example.xml.XMLHandler {
+- String filePath
+- {static} Validator<Movie> movieValidator
++ void save(LinkedList<Movie>)
++ LinkedList<Movie> loadJar()
++ LinkedList<Movie> loadLocal()
+- LinkedList<Movie> getMovies(BufferedReader)
+}
+
+
+class com.example.parsing.ScanMovie {
 - Movie movie
 - Coordinates coordinates
 - Scanner scanner
@@ -210,63 +300,61 @@ class com.example.forScanningAndParsing.ScanMovie {
 }
 
 
-class com.example.mainProgram.forCommands.commands.CountByOperator {
+class com.example.validate.YValidator {
++ void validate(Long)
+}
+
+class com.example.service.model.Coordinates {
+- double x
+- Long y
+- {static} Validator<Double> xValidator
+- {static} Validator<Long> yValidator
++ void setX(double)
++ void setY(Long)
+}
+
+
+enum com.example.service.enums.MpaaRating {
++  G
++  R
++  PG_13
++  NC_17
+}
+
+class com.example.app.commandhandling.commands.SumOfLengthCommand {
 - MovieCollection collection
-- String command
 + void execute()
 }
 
 
-class com.example.mainProgram.forCommands.commands.RemoveAtCommand {
-- MovieCollection collection
-- String command
-+ void execute()
-}
 
 
-class com.example.mainProgram.forCommands.commands.RemoveByIdCommand {
-- MovieCollection collection
-- String command
-+ void execute()
-}
-
-
-class com.example.forXML.XMLHandler {
-- String filePath
-+ void save(LinkedList<Movie>)
-+ LinkedList<Movie> loadJar()
-+ LinkedList<Movie> loadLocal()
-- LinkedList<Movie> getMovies(BufferedReader)
-- void validateMovie(Movie)
-}
-
-
-enum com.example.forCollection.enums.MovieGenre {
-+  COMEDY
-+  MUSICAL
-+  THRILLER
-+  HORROR
-}
-
-
-
-com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Person
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ExitCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.AddCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.InfoCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.SaveCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.HelpCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ReorderCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ExecuteScriptCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.SumOfLengthCommand
-com.example.forCollection.classes.Comparable <|.. com.example.forCollection.classes.Movie
-com.example.forScanningAndParsing.ParserClass <|-- com.example.forCollection.classes.Movie
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ShowCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveFirstProgram
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.PrintDescendingOscarsCountCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.UpdateCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.ClearCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.CountByOperator
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveAtCommand
-com.example.mainProgram.forCommands.Command <|.. com.example.mainProgram.forCommands.commands.RemoveByIdCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ExecuteScriptCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.AddCommand
+com.example.validate.Validator <|.. com.example.validate.WeightValidator
+com.example.validate.Validator <|.. com.example.validate.LengthValidator
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ReorderCommand
+com.example.validate.Validator <|.. com.example.validate.OscarsCountValidator
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.RemoveFirstProgram
+com.example.validate.Validator <|.. com.example.validate.MovieValidator
+com.example.validate.Validator <|.. com.example.validate.XValidator
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.InfoCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.HelpCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ShowCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.UpdateCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.CountByOperator
+com.example.service.model.Comparable <|.. com.example.service.model.Movie
+com.example.parsing.ParserClass <|-- com.example.service.model.Movie
+com.example.validate.Validator <|.. com.example.validate.CoordinateValidator
+com.example.validate.Validator <|.. com.example.validate.HeightValidator
+com.example.validate.Validator <|.. com.example.validate.NameValidator
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ClearCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.RemoveAtCommand
+com.example.parsing.ParserClass <|-- com.example.service.model.Person
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.SaveCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ExitCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.RemoveByIdCommand
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.PrintDescendingOscarsCountCommand
+com.example.validate.Validator <|.. com.example.validate.YValidator
+com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.SumOfLengthCommand
 @enduml
