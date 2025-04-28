@@ -22,7 +22,7 @@ public class CommandHandler {
         if (parts.length == 2) {
           invoker.execute(new SaveCommand(collection, parts[1]));
         } else {
-          System.out.println("Ошибка: укажите имя файла");
+          invoker.execute(command);
         }
       }
       case "count_by_operator" -> invoker.execute(new CountByOperator(collection, command));

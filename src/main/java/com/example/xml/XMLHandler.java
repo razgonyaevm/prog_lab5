@@ -31,7 +31,10 @@ public class XMLHandler {
       filePath = System.getProperty("user.home") + filePath.substring(1);
 
     File file = new File(filePath);
-    file.getParentFile().mkdirs();
+    File parent = file.getParentFile();
+    if (parent != null) {
+      parent.mkdirs();
+    }
 
     try (OutputStream outputStream = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(outputStream);

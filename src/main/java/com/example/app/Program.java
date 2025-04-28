@@ -43,6 +43,7 @@ public class Program {
     invoker.register("remove_first", new RemoveFirstProgram(collection));
     invoker.register("reorder", new ReorderCommand(collection));
     invoker.register("sum_of_length", new SumOfLengthCommand(collection));
+    invoker.register("save", new SaveCommand(collection, filePath));
     invoker.register(
         "print_field_descending_oscars_count", new PrintDescendingOscarsCountCommand(collection));
 

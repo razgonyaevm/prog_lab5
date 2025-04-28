@@ -109,7 +109,7 @@ public class MovieCollection {
     return movies.size();
   }
 
-  /** Сохраняет коллекцию в файл save_movies.xml */
+  /** Сохраняет коллекцию в файл */
   public void save(String filePath) {
     XMLHandler xmlHandler = new XMLHandler(filePath);
     xmlHandler.save((LinkedList<Movie>) movies);
