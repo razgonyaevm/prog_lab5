@@ -16,34 +16,19 @@ import java.util.*;
 public class Program {
   public static void main(String[] args) {
     MovieCollection collection = new MovieCollection();
-    int index = 0;
     if (args.length < 1) {
       System.out.println("Ошибка: укажите файл для загрузки данных");
       return;
     }
 
-    if (Objects.equals(args[0], "jar")) index = 1;
-
-    if (index == 1) {
-      System.out.println("Загрузка из jar-файла");
-      XMLHandler xmlHandler;
-      if (args.length == 1) {
-        xmlHandler = new XMLHandler("xml/movies.xml");
-      } else {
-        xmlHandler = new XMLHandler("xml/" + args[1]);
-      }
-
-      collection.setMovies(xmlHandler.loadJar());
-    } else {
-      if (!args[index].trim().endsWith(".xml")) {
-        System.out.println("Ошибка: укажите файл с расширением .xml");
-        return;
-      }
-
-      String filePath = args[0];
-      XMLHandler xmlHandler = new XMLHandler(filePath);
-      collection.setMovies(xmlHandler.loadLocal());
+    if (!args[0].trim().endsWith(".xml")) {
+      System.out.println("Ошибка: укажите файл с расширением .xml");
+      return;
     }
+
+    String filePath = args[0];
+    XMLHandler xmlHandler = new XMLHandler(filePath);
+    collection.setMovies(xmlHandler.loadLocal());
 
     Scanner scanner = new Scanner(System.in);
     CommandInvoker invoker = new CommandInvoker();

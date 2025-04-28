@@ -50,27 +50,6 @@ public class XMLHandler {
     }
   }
 
-  /** Загрузка коллекции из JAR-файла */
-  public LinkedList<Movie> loadJar() {
-    try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-      if (inputStream == null) {
-        System.out.println("Файл не найден");
-        return new LinkedList<>();
-      }
-
-      try (BufferedInputStream bis = new BufferedInputStream(inputStream);
-          InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
-          BufferedReader br = new BufferedReader(isr)) {
-
-        return getMovies(br);
-      }
-
-    } catch (Exception e) {
-      System.out.println("Ошибка загрузки XML: " + e.getMessage());
-      return new LinkedList<>();
-    }
-  }
-
   /** Загрузка коллекции из локального репозитория */
   public LinkedList<Movie> loadLocal() {
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
