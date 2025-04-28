@@ -4,6 +4,9 @@ import com.example.parsing.ParserClass;
 import com.example.service.enums.MovieGenre;
 import com.example.service.enums.MpaaRating;
 import com.example.validate.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,9 +17,10 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD) // Аннатация для работы JAXB с полями
 public class Movie extends ParserClass implements Comparable<Movie> {
 
-  private Long id;
+  @XmlElement private Long id;
   private String name;
   private Coordinates coordinates;
   private final LocalDate creationDate;
