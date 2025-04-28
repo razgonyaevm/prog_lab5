@@ -15,10 +15,10 @@ public class CountByOperator implements Command {
 
   @Override
   public void execute() {
-    if (command.length() <= 18) {
+    if (command.length() <= "count_by_operator".length() + 1) {
       System.out.println("Ошибка: укажите имя оператора");
       return;
     }
-    collection.countByOperator(command.substring(18));
+    collection.countByOperator(command.substring("count_by_operator".length() + 1));
   }
 }
