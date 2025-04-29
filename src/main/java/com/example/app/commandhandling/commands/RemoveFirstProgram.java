@@ -13,5 +13,6 @@ public class RemoveFirstProgram implements Command {
   @Override
   public void execute() {
     collection.removeFirst();
+    System.out.println("Первый фильм успешно удален");
   }
 }

@@ -13,5 +13,6 @@ public class ReorderCommand implements Command {
   @Override
   public void execute() {
     collection.reorder();
+    System.out.println("Порядок фильмов успешно изменен");
   }
 }

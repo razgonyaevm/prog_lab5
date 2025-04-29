@@ -21,6 +21,7 @@ public class AddCommand implements Command {
   public void execute() {
     try {
       collection.add(new ScanMovie(scanner, execute_script).getMovie());
+      System.out.println("Фильм успешно добавлен");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }

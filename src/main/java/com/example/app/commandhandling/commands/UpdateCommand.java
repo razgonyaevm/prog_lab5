@@ -40,6 +40,7 @@ public class UpdateCommand implements Command {
         if (collection.get(i).getId().equals(id)) {
           Movie movieUpdate = new ScanMovie(scanner, execute_script).getMovie();
           collection.update(id, movieUpdate);
+          System.out.println("Фильм успешно обновлен");
           return;
         }
       }

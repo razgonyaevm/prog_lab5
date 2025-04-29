@@ -81,6 +81,7 @@ public class XMLHandler {
     for (Movie movie : movies) {
       movieValidator.validate(movie);
     }
+    System.out.println("Коллекция загружена");
     return movies;
   }
 }

@@ -48,6 +48,7 @@ public class ExecuteScriptCommand implements Command {
           handleCommand(command, collection, fileScanner, invoker, true);
         }
       }
+      System.out.println("Выполнение скрипта " + fileName + " завершено");
     } catch (FileNotFoundException e) {
       System.out.println("Файл не найден");
     } catch (Exception e) {
