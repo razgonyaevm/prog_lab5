@@ -88,9 +88,9 @@ public class MovieCollection {
   public void countByOperator(String operatorName) {
     long count =
         movies.stream()
-            .filter(m -> Objects.equals(m.getOperator().getName(), operatorName.strip()))
+            .filter(m -> Objects.equals(m.getOperator().getName(), operatorName))
             .count();
-    System.out.println("Количество фильмов оператора " + operatorName.strip() + ": " + count);
+    System.out.println("Количество фильмов оператора " + operatorName + ": " + count);
   }
 
   /** Выводит количество оскаров у всех фильмов в порядке убывания */

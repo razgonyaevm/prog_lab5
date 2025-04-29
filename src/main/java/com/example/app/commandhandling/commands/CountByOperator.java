@@ -19,6 +19,6 @@ public class CountByOperator implements Command {
       System.out.println("Ошибка: укажите имя оператора");
       return;
     }
-    collection.countByOperator(command.substring("count_by_operator".length() + 1));
+    collection.countByOperator(command.substring("count_by_operator".length() + 1).strip());
   }
 }
