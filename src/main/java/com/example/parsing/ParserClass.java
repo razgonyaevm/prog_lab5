@@ -44,13 +44,7 @@ public class ParserClass {
       return Enum.valueOf(enumType, value);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException(
-          new StringBuilder()
-              .append("Invalid enum value: ")
-              .append(value)
-              .append(" for ")
-              .append(enumType.getSimpleName())
-              .toString(),
-          e);
+          "Invalid enum value: " + value + " for " + enumType.getSimpleName(), e);
     }
   }
 }

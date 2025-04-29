@@ -43,19 +43,15 @@ public class MovieCollection {
   /** Выводит все элементы коллекции в строковом представлении */
   public void show() {
     int index = 1; // Нумерация начинается с 1
+    StringBuilder result = new StringBuilder();
     for (Movie movie : movies) {
-      System.out.println(
-          new StringBuilder()
-              .append("Фильм ")
-              .append(index)
-              .append(": ")
-              .append(movie)
-              .append("\n")
-              .toString());
+      result.append("Фильм ").append(index).append(": ").append(movie).append("\n");
       index++;
     }
     if (movies.isEmpty()) {
       System.out.println("В коллекции нет элементов");
+    } else {
+      System.out.println(result);
     }
   }
 
@@ -94,13 +90,7 @@ public class MovieCollection {
         movies.stream()
             .filter(m -> Objects.equals(m.getOperator().getName(), operatorName.strip()))
             .count();
-    System.out.println(
-        new StringBuilder()
-            .append("Количество фильмов оператора ")
-            .append(operatorName.strip())
-            .append(": ")
-            .append(count)
-            .toString());
+    System.out.println("Количество фильмов оператора " + operatorName.strip() + ": " + count);
   }
 
   /** Выводит количество оскаров у всех фильмов в порядке убывания */
