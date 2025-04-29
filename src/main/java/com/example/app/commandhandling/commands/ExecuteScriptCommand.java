@@ -28,7 +28,9 @@ public class ExecuteScriptCommand implements Command {
       Scanner fileScanner = new Scanner(br);
       while (fileScanner.hasNextLine()) {
         String command = fileScanner.nextLine().trim();
-        handleCommand(command, collection, fileScanner, invoker);
+        if (!command.isEmpty()) {
+          handleCommand(command, collection, fileScanner, invoker, true);
+        }
       }
     } catch (FileNotFoundException e) {
       System.out.println("Файл не найден");

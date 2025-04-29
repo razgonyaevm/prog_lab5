@@ -13,11 +13,14 @@ public class UpdateCommand implements Command {
   private final MovieCollection collection;
   private final Scanner scanner;
   private final String command;
+  private final Boolean execute_script;
 
-  public UpdateCommand(MovieCollection collection, Scanner scanner, String command) {
+  public UpdateCommand(
+      MovieCollection collection, Scanner scanner, String command, Boolean execute_script) {
     this.collection = collection;
     this.scanner = scanner;
     this.command = command;
+    this.execute_script = execute_script;
   }
 
   @Override
@@ -35,7 +38,7 @@ public class UpdateCommand implements Command {
       }
       for (int i = 0; i < collection.size(); i++) {
         if (collection.get(i).getId().equals(id)) {
-          Movie movieUpdate = new ScanMovie(scanner).getMovie();
+          Movie movieUpdate = new ScanMovie(scanner, execute_script).getMovie();
           collection.update(id, movieUpdate);
           return;
         }

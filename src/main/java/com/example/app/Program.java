@@ -36,7 +36,7 @@ public class Program {
     // Регистрация команд
     invoker.register("help", new HelpCommand());
     invoker.register("info", new InfoCommand(collection));
-    invoker.register("add", new AddCommand(collection, scanner));
+    invoker.register("add", new AddCommand(collection, scanner, false));
     invoker.register("show", new ShowCommand(collection));
     invoker.register("clear", new ClearCommand(collection));
     invoker.register("exit", new ExitCommand());
@@ -49,7 +49,7 @@ public class Program {
 
     while (scanner.hasNextLine()) {
       String command = scanner.nextLine().trim();
-      handleCommand(command, collection, scanner, invoker);
+      handleCommand(command, collection, scanner, invoker, false);
     }
   }
 }

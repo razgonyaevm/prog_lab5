@@ -9,16 +9,18 @@ import java.util.Scanner;
 public class AddCommand implements Command {
   private final MovieCollection collection;
   private final Scanner scanner;
+  private final Boolean execute_script;
 
-  public AddCommand(MovieCollection collection, Scanner scanner) {
+  public AddCommand(MovieCollection collection, Scanner scanner, Boolean execute_script) {
     this.collection = collection;
     this.scanner = scanner;
+    this.execute_script = execute_script;
   }
 
   @Override
   public void execute() {
     try {
-      collection.add(new ScanMovie(scanner).getMovie());
+      collection.add(new ScanMovie(scanner, execute_script).getMovie());
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
