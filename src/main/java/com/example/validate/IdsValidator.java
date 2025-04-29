@@ -3,17 +3,17 @@ package com.example.validate;
 import com.example.service.model.IdGenerator;
 import com.example.service.model.Movie;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
-public class IdsValidator implements Validator<LinkedList<Movie>> {
+public class IdsValidator implements Validator<List<Movie>> {
   @Override
-  public void validate(LinkedList<Movie> movies) {
+  public void validate(List<Movie> movies) {
     validateAndGenerateIds(movies);
   }
 
   /* Метод для валидации и генерации ID */
-  private void validateAndGenerateIds(LinkedList<Movie> movies) {
+  private void validateAndGenerateIds(List<Movie> movies) {
     // Сбрасываем генератор ID для того, чтобы новые ID не конфликтовали с существующими
     resetIdGenerator(movies);
 
@@ -26,7 +26,7 @@ public class IdsValidator implements Validator<LinkedList<Movie>> {
   }
 
   /* Метод для сброса генератора ID */
-  private void resetIdGenerator(LinkedList<Movie> movies) {
+  private void resetIdGenerator(List<Movie> movies) {
     long maxId = 0;
     boolean hasIds = false;
 
@@ -50,7 +50,7 @@ public class IdsValidator implements Validator<LinkedList<Movie>> {
   }
 
   /* Метод для проверки дубликатов ID */
-  private void checkDuplicateIds(LinkedList<Movie> movies) {
+  private void checkDuplicateIds(List<Movie> movies) {
     Set<Long> ids = new HashSet<>();
     for (Movie movie : movies) {
       if (movie.getId() != null) {

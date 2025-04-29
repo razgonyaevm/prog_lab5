@@ -8,6 +8,7 @@ import jakarta.xml.bind.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Сохранение и загрузка коллекции в XML. Документация взята из <a
@@ -17,7 +18,7 @@ public class XMLHandler {
   private String filePath;
 
   private static final Validator<Movie> movieValidator = new MovieValidator();
-  private static final Validator<LinkedList<Movie>> idsValidator = new IdsValidator();
+  private static final Validator<List<Movie>> idsValidator = new IdsValidator();
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
