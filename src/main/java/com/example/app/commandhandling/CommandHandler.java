@@ -2,7 +2,6 @@ package com.example.app.commandhandling;
 
 import com.example.app.commandhandling.commands.*;
 import com.example.service.MovieCollection;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CommandHandler {
@@ -35,7 +34,8 @@ public class CommandHandler {
       case "count_by_operator" ->
           invoker.execute(
               new CountByOperator(
-                  collection, String.join(" ", Arrays.copyOfRange(parts, 1, parts.length))));
+                  collection, command.substring("count_by_operator".length()).trim()));
+
       case "remove_by_id" -> invoker.execute(new RemoveByIdCommand(collection, command));
       case "remove_at" -> invoker.execute(new RemoveAtCommand(collection, command));
       default -> invoker.execute(command);
