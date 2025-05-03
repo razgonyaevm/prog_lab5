@@ -9,10 +9,11 @@ import lombok.Setter;
 /** Класс-обертка для реализации Movie в XML */
 @Setter
 @XmlRootElement(name = "movies")
+@XmlAccessorType(XmlAccessType.FIELD) // Аннатация для работы JAXB с полями
 public class MovieCollectionWrapper {
+  @XmlElement(name = "movie")
   private List<Movie> movies = new LinkedList<>();
 
-  @XmlElement(name = "movie")
   public LinkedList<Movie> getMovies() {
     return (LinkedList<Movie>) movies;
   }

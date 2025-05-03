@@ -24,6 +24,7 @@ public class RemoveByIdCommand implements Command {
     }
     try {
       collection.removeById(parseLong(parts[1]));
+      System.out.println("Фильм успешно удален");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }

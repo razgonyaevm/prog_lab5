@@ -1,12 +1,14 @@
 package com.example.xml;
 
 import com.example.service.model.Movie;
+import com.example.validate.IdsValidator;
 import com.example.validate.MovieValidator;
 import com.example.validate.Validator;
 import jakarta.xml.bind.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Сохранение и загрузка коллекции в XML. Документация взята из <a
@@ -16,6 +18,7 @@ public class XMLHandler {
   private String filePath;
 
   private static final Validator<Movie> movieValidator = new MovieValidator();
+  private static final Validator<List<Movie>> idsValidator = new IdsValidator();
 
   public XMLHandler(String filePath) {
     this.filePath = filePath;
@@ -28,7 +31,10 @@ public class XMLHandler {
       filePath = System.getProperty("user.home") + filePath.substring(1);
 
     File file = new File(filePath);
-    file.getParentFile().mkdirs();
+    File parent = file.getParentFile();
+    if (parent != null) {
+      parent.mkdirs();
+    }
 
     try (OutputStream outputStream = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(outputStream);
@@ -44,27 +50,6 @@ public class XMLHandler {
       marshaller.marshal(wrapper, osw);
     } catch (Exception e) {
       System.out.println("Ошибка при сохранении XML: " + e.getMessage());
-    }
-  }
-
-  /** Загрузка коллекции из JAR-файла */
-  public LinkedList<Movie> loadJar() {
-    try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-      if (inputStream == null) {
-        System.out.println("Файл не найден");
-        return new LinkedList<>();
-      }
-
-      try (BufferedInputStream bis = new BufferedInputStream(inputStream);
-          InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
-          BufferedReader br = new BufferedReader(isr)) {
-
-        return getMovies(br);
-      }
-
-    } catch (Exception e) {
-      System.out.println("Ошибка загрузки XML: " + e.getMessage());
-      return new LinkedList<>();
     }
   }
 
@@ -90,9 +75,14 @@ public class XMLHandler {
     MovieCollectionWrapper wrapper = (MovieCollectionWrapper) unmarshaller.unmarshal(br);
 
     LinkedList<Movie> movies = wrapper.getMovies();
+
+    // Проверяем уникальность ID и генерируем новые при необходимости
+    idsValidator.validate(movies);
+
     for (Movie movie : movies) {
       movieValidator.validate(movie);
     }
+    System.out.println("Коллекция загружена");
     return movies;
   }
 }

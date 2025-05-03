@@ -43,12 +43,15 @@ public class MovieCollection {
   /** Выводит все элементы коллекции в строковом представлении */
   public void show() {
     int index = 1; // Нумерация начинается с 1
+    StringBuilder result = new StringBuilder();
     for (Movie movie : movies) {
-      System.out.println("Фильм " + index + ": " + movie + "\n");
+      result.append("Фильм ").append(index).append(": ").append(movie).append("\n");
       index++;
     }
     if (movies.isEmpty()) {
       System.out.println("В коллекции нет элементов");
+    } else {
+      System.out.println(result);
     }
   }
 
@@ -109,7 +112,7 @@ public class MovieCollection {
     return movies.size();
   }
 
-  /** Сохраняет коллекцию в файл save_movies.xml */
+  /** Сохраняет коллекцию в файл */
   public void save(String filePath) {
     XMLHandler xmlHandler = new XMLHandler(filePath);
     xmlHandler.save((LinkedList<Movie>) movies);

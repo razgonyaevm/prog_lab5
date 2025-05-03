@@ -24,6 +24,7 @@ public class RemoveAtCommand implements Command {
     }
     try {
       collection.removeAt(parseInt(command.trim().split("\\s+")[1]));
+      System.out.println("Фильм успешно удален");
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }

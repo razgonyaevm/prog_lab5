@@ -8,4 +8,9 @@ public class IdGenerator {
   public static long getNextId() {
     return nextId++;
   }
+
+  /* Сбрасывает генератор на указанное значение */
+  public static void reset(long newStartValue) {
+    nextId = newStartValue;
+  }
 }

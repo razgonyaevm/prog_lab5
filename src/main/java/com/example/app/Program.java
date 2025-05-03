@@ -16,34 +16,19 @@ import java.util.*;
 public class Program {
   public static void main(String[] args) {
     MovieCollection collection = new MovieCollection();
-    int index = 0;
     if (args.length < 1) {
       System.out.println("Ошибка: укажите файл для загрузки данных");
       return;
     }
 
-    if (Objects.equals(args[0], "jar")) index = 1;
-
-    if (index == 1) {
-      System.out.println("Загрузка из jar-файла");
-      XMLHandler xmlHandler;
-      if (args.length == 1) {
-        xmlHandler = new XMLHandler("xml/movies.xml");
-      } else {
-        xmlHandler = new XMLHandler("xml/" + args[1]);
-      }
-
-      collection.setMovies(xmlHandler.loadJar());
-    } else {
-      if (!args[index].trim().endsWith(".xml")) {
-        System.out.println("Ошибка: укажите файл с расширением .xml");
-        return;
-      }
-
-      String filePath = args[0];
-      XMLHandler xmlHandler = new XMLHandler(filePath);
-      collection.setMovies(xmlHandler.loadLocal());
+    if (!args[0].trim().endsWith(".xml")) {
+      System.out.println("Ошибка: укажите файл с расширением .xml");
+      return;
     }
+
+    String filePath = args[0];
+    XMLHandler xmlHandler = new XMLHandler(filePath);
+    collection.setMovies(xmlHandler.loadLocal());
 
     Scanner scanner = new Scanner(System.in);
     CommandInvoker invoker = new CommandInvoker();
@@ -51,19 +36,20 @@ public class Program {
     // Регистрация команд
     invoker.register("help", new HelpCommand());
     invoker.register("info", new InfoCommand(collection));
-    invoker.register("add", new AddCommand(collection, scanner));
+    invoker.register("add", new AddCommand(collection, scanner, false));
     invoker.register("show", new ShowCommand(collection));
     invoker.register("clear", new ClearCommand(collection));
     invoker.register("exit", new ExitCommand());
     invoker.register("remove_first", new RemoveFirstProgram(collection));
     invoker.register("reorder", new ReorderCommand(collection));
     invoker.register("sum_of_length", new SumOfLengthCommand(collection));
+    invoker.register("save", new SaveCommand(collection, filePath));
     invoker.register(
         "print_field_descending_oscars_count", new PrintDescendingOscarsCountCommand(collection));
 
     while (scanner.hasNextLine()) {
       String command = scanner.nextLine().trim();
-      handleCommand(command, collection, scanner, invoker);
+      handleCommand(command, collection, scanner, invoker, false);
     }
   }
 }

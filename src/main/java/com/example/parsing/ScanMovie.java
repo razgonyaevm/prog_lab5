@@ -15,11 +15,13 @@ public class ScanMovie {
   @Getter private final Movie movie;
   private final Coordinates coordinates;
   private final Scanner scanner;
+  private final Boolean execute_script;
 
-  public ScanMovie(Scanner scanner) {
+  public ScanMovie(Scanner scanner, Boolean execute_script) {
     this.scanner = scanner;
     movie = new Movie();
     coordinates = new Coordinates();
+    this.execute_script = execute_script;
 
     setName();
     setCoordinates();
@@ -27,7 +29,7 @@ public class ScanMovie {
     setLength();
     setGenre();
     setMpaaRating();
-    ScanOperator operator = new ScanOperator(scanner);
+    ScanOperator operator = new ScanOperator(scanner, execute_script);
     movie.setOperator(operator.getOperator());
   }
 
@@ -35,7 +37,9 @@ public class ScanMovie {
   public void setName() {
     while (true) {
       try {
-        System.out.print("Введите название фильма: ");
+        if (!execute_script) {
+          System.out.print("Введите название фильма: ");
+        }
         movie.setName(scanner.nextLine());
         break;
       } catch (IllegalArgumentException e) {
@@ -48,7 +52,9 @@ public class ScanMovie {
   public void setCoordinates() {
     while (true) {
       try {
-        System.out.print("Введите первую координату: ");
+        if (!execute_script) {
+          System.out.print("Введите первую координату: ");
+        }
         String x = scanner.nextLine();
         if (x.trim().isEmpty()) {
           System.out.println("Значение не может быть null");
@@ -63,7 +69,9 @@ public class ScanMovie {
 
     while (true) {
       try {
-        System.out.print("Введите вторую координату: ");
+        if (!execute_script) {
+          System.out.print("Введите вторую координату: ");
+        }
         String y = scanner.nextLine();
         if (y.trim().isEmpty()) {
           System.out.println("Значение не может быть null");
@@ -83,7 +91,9 @@ public class ScanMovie {
   public void setOscarsCount() {
     while (true) {
       try {
-        System.out.print("Введите количество оскаров: ");
+        if (!execute_script) {
+          System.out.print("Введите количество оскаров: ");
+        }
         String count = scanner.nextLine();
         if (count.trim().isEmpty()) {
           System.out.println("Значение не может быть null");
@@ -101,7 +111,9 @@ public class ScanMovie {
   public void setLength() {
     while (true) {
       try {
-        System.out.print("Введите длительность фильма: ");
+        if (!execute_script) {
+          System.out.print("Введите длительность фильма: ");
+        }
         String length = scanner.nextLine();
         if (length.trim().isEmpty()) {
           System.out.println("Значение не может быть null");
@@ -119,10 +131,12 @@ public class ScanMovie {
   public void setGenre() {
     while (true) {
       try {
-        System.out.print(
-            "Введите жанр фильма (возможные значения: "
-                + Arrays.toString(MovieGenre.values())
-                + "): ");
+        if (!execute_script) {
+          System.out.print(
+              "Введите жанр фильма (возможные значения: "
+                  + Arrays.toString(MovieGenre.values())
+                  + "): ");
+        }
         String genre = scanner.nextLine().toUpperCase();
         if (genre.trim().isEmpty()) {
           movie.setGenre(null);
@@ -140,10 +154,13 @@ public class ScanMovie {
   public void setMpaaRating() {
     while (true) {
       try {
-        System.out.print(
-            "Введите рейтинг фильма (возможные значения: "
-                + Arrays.toString(MpaaRating.values())
-                + "): ");
+        if (!execute_script) {
+          System.out.print(
+              "Введите рейтинг фильма (возможные значения: "
+                  + Arrays.toString(MpaaRating.values())
+                  + "): ");
+        }
+
         String mpaaRating = scanner.nextLine().toUpperCase();
         if (mpaaRating.trim().isEmpty()) {
           movie.setMpaaRating(null);

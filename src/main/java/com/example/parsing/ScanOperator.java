@@ -15,18 +15,21 @@ import lombok.Getter;
 public class ScanOperator {
   private final Scanner scanner;
   @Getter private final Person operator;
+  private final Boolean execute_script;
 
-  public ScanOperator(Scanner scanner) {
+  public ScanOperator(Scanner scanner, Boolean execute_script) {
     this.scanner = scanner;
     operator = new Person();
-
+    this.execute_script = execute_script;
     setOperator();
   }
 
   public void setOperator() {
     while (true) {
       try {
-        System.out.print("Введите имя оператора: ");
+        if (!execute_script) {
+          System.out.print("Введите имя оператора: ");
+        }
         operator.setName(scanner.nextLine());
         break;
       } catch (IllegalArgumentException e) {
@@ -36,7 +39,9 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.print("Введите рост оператора: ");
+        if (!execute_script) {
+          System.out.print("Введите рост оператора: ");
+        }
         String height = scanner.nextLine();
         if (height.trim().isEmpty()) {
           System.out.println("Значение не может быть null");
@@ -51,7 +56,9 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.print("Введите вес оператора: ");
+        if (!execute_script) {
+          System.out.print("Введите вес оператора: ");
+        }
         String weight = scanner.nextLine();
         if (weight.trim().isEmpty()) {
           operator.setWeight(0);
@@ -66,10 +73,12 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.println(
-            "Введите любимый цвет оператора: (возможные значения: "
-                + Arrays.toString(Color.values())
-                + "): ");
+        if (!execute_script) {
+          System.out.println(
+              "Введите любимый цвет оператора: (возможные значения: "
+                  + Arrays.toString(Color.values())
+                  + "): ");
+        }
         String color = scanner.nextLine().toUpperCase();
         if (color.trim().isEmpty()) {
           operator.setEyeColor(null);
@@ -84,10 +93,12 @@ public class ScanOperator {
 
     while (true) {
       try {
-        System.out.println(
-            "Введите национальность оператора (возможные значения: "
-                + Arrays.toString(Country.values())
-                + "): ");
+        if (!execute_script) {
+          System.out.println(
+              "Введите национальность оператора (возможные значения: "
+                  + Arrays.toString(Country.values())
+                  + "): ");
+        }
         String nationality = scanner.nextLine().toUpperCase();
         if (nationality.trim().isEmpty()) {
           operator.setNationality(null);
