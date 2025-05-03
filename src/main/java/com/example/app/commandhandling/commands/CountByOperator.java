@@ -6,19 +6,19 @@ import com.example.service.MovieCollection;
 /** Подсчет количества фильмов, у которых имя оператора равно заданному */
 public class CountByOperator implements Command {
   private final MovieCollection collection;
-  private final String command;
+  private final String operatorName;
 
-  public CountByOperator(MovieCollection collection, String command) {
+  public CountByOperator(MovieCollection collection, String operatorName) {
     this.collection = collection;
-    this.command = command;
+    this.operatorName = operatorName;
   }
 
   @Override
   public void execute() {
-    if (command.length() <= "count_by_operator".length() + 1) {
+    if (operatorName == null || operatorName.isBlank()) {
       System.out.println("Ошибка: укажите имя оператора");
       return;
     }
-    collection.countByOperator(command.substring("count_by_operator".length() + 1).strip());
+    collection.countByOperator(operatorName);
   }
 }
