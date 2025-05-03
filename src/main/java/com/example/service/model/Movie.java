@@ -7,6 +7,7 @@ import com.example.validate.*;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,10 +21,10 @@ import lombok.ToString;
 @XmlAccessorType(XmlAccessType.FIELD) // Аннатация для работы JAXB с полями
 public class Movie extends ParserClass implements Comparable<Movie> {
 
-  @XmlElement private Long id;
+  @XmlElement @Setter private Long id;
   private String name;
   private Coordinates coordinates;
-  private final LocalDate creationDate;
+  @XmlTransient private final LocalDate creationDate;
   private int oscarsCount;
   private Integer length;
   @Setter private MovieGenre genre;
@@ -36,7 +37,6 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   private static final Validator<Integer> lengthValidator = new LengthValidator();
 
   public Movie() {
-    generateId();
     this.creationDate = LocalDate.now();
   }
 
@@ -61,7 +61,7 @@ public class Movie extends ParserClass implements Comparable<Movie> {
   }
 
   /** Устанавливает id */
-  private void generateId() {
+  public void generateId() {
     this.id = IdGenerator.getNextId();
   }
 
