@@ -1,8 +1,6 @@
 @startuml
-
-scale 0.15
-skinparam dpi 300
-
+scale 0.1
+skinparam dpi 400
 class com.example.parsing.ParserClass {
 + {static} int parseInt(String)
 + {static} long parseLong(String)
@@ -16,6 +14,7 @@ interface com.example.app.commandhandling.Command {
 }
 
 class com.example.app.commandhandling.commands.ExecuteScriptCommand {
+- {static} Deque<String> executingScripts
 - MovieCollection collection
 - String fileName
 - CommandInvoker invoker
@@ -26,6 +25,7 @@ class com.example.app.commandhandling.commands.ExecuteScriptCommand {
 class com.example.app.commandhandling.commands.AddCommand {
 - MovieCollection collection
 - Scanner scanner
+- Boolean execute_script
 + void execute()
 }
 
@@ -131,7 +131,7 @@ class com.example.app.commandhandling.commands.HelpCommand {
 }
 
 class com.example.app.commandhandling.CommandHandler {
-+ {static} void handleCommand(String,MovieCollection,Scanner,CommandInvoker)
++ {static} void handleCommand(String,MovieCollection,Scanner,CommandInvoker,Boolean)
 }
 
 class com.example.app.commandhandling.commands.ShowCommand {
@@ -148,13 +148,21 @@ class com.example.app.commandhandling.commands.UpdateCommand {
 - MovieCollection collection
 - Scanner scanner
 - String command
+- Boolean execute_script
 + void execute()
 }
 
 
+class com.example.validate.IdsValidator {
++ void validate(List<Movie>)
+- void validateIdsExisted(List<Movie>)
+- long validateNoDuplicates(List<Movie>)
+- void updateIdGenerator(long)
+}
+
 class com.example.app.commandhandling.commands.CountByOperator {
 - MovieCollection collection
-- String command
+- String operatorName
 + void execute()
 }
 
@@ -173,7 +181,7 @@ class com.example.service.model.Movie {
 - {static} Validator<Coordinates> coordinatesValidator
 - {static} Validator<Integer> oscarsCountValidator
 - {static} Validator<Integer> lengthValidator
-- void generateId()
++ void generateId()
 + void updateId(long)
 + void setName(String)
 + void setCoordinates(Coordinates)
@@ -199,6 +207,7 @@ class com.example.xml.MovieCollectionWrapper {
 class com.example.parsing.ScanOperator {
 - Scanner scanner
 - Person operator
+- Boolean execute_script
 + void setOperator()
 }
 
@@ -206,6 +215,7 @@ class com.example.parsing.ScanOperator {
 class com.example.service.model.IdGenerator {
 - {static} long nextId
 + {static} long getNextId()
++ {static} void reset(long)
 }
 
 
@@ -280,8 +290,8 @@ class com.example.app.commandhandling.commands.PrintDescendingOscarsCountCommand
 class com.example.xml.XMLHandler {
 - String filePath
 - {static} Validator<Movie> movieValidator
+- {static} Validator<List<Movie>> idsValidator
 + void save(LinkedList<Movie>)
-+ LinkedList<Movie> loadJar()
 + LinkedList<Movie> loadLocal()
 - LinkedList<Movie> getMovies(BufferedReader)
 }
@@ -291,6 +301,7 @@ class com.example.parsing.ScanMovie {
 - Movie movie
 - Coordinates coordinates
 - Scanner scanner
+- Boolean execute_script
 + void setName()
 + void setCoordinates()
 + void setOscarsCount()
@@ -342,6 +353,7 @@ com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.com
 com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.HelpCommand
 com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.ShowCommand
 com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.UpdateCommand
+com.example.validate.Validator <|.. com.example.validate.IdsValidator
 com.example.app.commandhandling.Command <|.. com.example.app.commandhandling.commands.CountByOperator
 com.example.service.model.Comparable <|.. com.example.service.model.Movie
 com.example.parsing.ParserClass <|-- com.example.service.model.Movie
