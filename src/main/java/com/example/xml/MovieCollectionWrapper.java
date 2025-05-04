@@ -14,6 +14,7 @@ public class MovieCollectionWrapper {
   @XmlElement(name = "movie")
   private List<Movie> movies = new LinkedList<>();
 
+  /** Геттер коллекции */
   public LinkedList<Movie> getMovies() {
     return (LinkedList<Movie>) movies;
   }

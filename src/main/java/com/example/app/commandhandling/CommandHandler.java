@@ -4,6 +4,7 @@ import com.example.app.commandhandling.commands.*;
 import com.example.service.MovieCollection;
 import java.util.Scanner;
 
+/** Обработка команд */
 public class CommandHandler {
   public static void handleCommand(
       String command,

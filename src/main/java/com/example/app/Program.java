@@ -8,11 +8,7 @@ import com.example.service.MovieCollection;
 import com.example.xml.XMLHandler;
 import java.util.*;
 
-/**
- * Основная программа. При запуске аргументом указывается имя xml-файла. Если перед аргументом нет
- * ключевого слова jar, то программа загружает данные из локальной директории. Иначе программа
- * загружает данные из jar-файла
- */
+/** Основная программа. При запуске аргументом указывается имя xml-файла */
 public class Program {
   public static void main(String[] args) {
     MovieCollection collection = new MovieCollection();

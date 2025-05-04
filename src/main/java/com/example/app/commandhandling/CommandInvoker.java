@@ -3,6 +3,7 @@ package com.example.app.commandhandling;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Класс, отвечающий за выполнение команд */
 public class CommandInvoker {
   private final Map<String, Command> commands = new HashMap<>();
 

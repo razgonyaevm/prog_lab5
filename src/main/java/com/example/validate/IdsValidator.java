@@ -4,7 +4,7 @@ import com.example.service.model.IdGenerator;
 import com.example.service.model.Movie;
 import java.util.*;
 
-/* Валидация id фильмов */
+/** Валидация id фильмов */
 public class IdsValidator implements Validator<List<Movie>> {
   @Override
   public void validate(List<Movie> movies) {
@@ -13,7 +13,7 @@ public class IdsValidator implements Validator<List<Movie>> {
     updateIdGenerator(maxId);
   }
 
-  /* Метод для проверки наличия ID */
+  /** Метод для проверки наличия ID */
   private void validateIdsExisted(List<Movie> movies) {
     long moviesWithoutId = movies.stream().filter(movie -> movie.getId() == null).count();
 
@@ -22,7 +22,7 @@ public class IdsValidator implements Validator<List<Movie>> {
     }
   }
 
-  /* Метод для проверки дубликатов ID */
+  /** Метод для проверки дубликатов ID */
   private long validateNoDuplicates(List<Movie> movies) {
     Set<Long> uniqueIds = new HashSet<>();
     long maxId = 0;
@@ -44,7 +44,7 @@ public class IdsValidator implements Validator<List<Movie>> {
     return maxId;
   }
 
-  /* Метод для обновления генератора ID */
+  /** Метод для обновления генератора ID */
   private void updateIdGenerator(long maxId) {
     IdGenerator.reset(maxId + 1);
   }

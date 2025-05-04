@@ -9,7 +9,7 @@ public class IdGenerator {
     return nextId++;
   }
 
-  /* Сбрасывает генератор на указанное значение */
+  /** Сбрасывает генератор на указанное значение */
   public static void reset(long newStartValue) {
     nextId = newStartValue;
   }

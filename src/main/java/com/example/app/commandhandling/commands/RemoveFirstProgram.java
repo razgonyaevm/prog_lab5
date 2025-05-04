@@ -3,6 +3,7 @@ package com.example.app.commandhandling.commands;
 import com.example.app.commandhandling.Command;
 import com.example.service.MovieCollection;
 
+/** Удаление первого фильма из коллекции */
 public class RemoveFirstProgram implements Command {
   private final MovieCollection collection;
 
